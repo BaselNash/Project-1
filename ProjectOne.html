@@ -57,35 +57,38 @@
 	PlayerInventory[1] = ""
 	PlayerInventory[2] = ""
 	PlayerInventory[3] = ""
-	PlayerInventory[5] = ""
+	PlayerInventory[4] = ""
  
  function takeItem(){
+	 
+ 	button = document.getElementById('userNavigationControler').value;
+ 	var buttonUpperCase = button.toUpperCase();
  	
-	if(buttonUpperCase === "TAKE" + ItemsArray[0].name) {
+	if(buttonUpperCase === ItemsArray[0].name) {
 		
 		PlayerInventory[0] = ItemsArray[0].toString();
 		
 		ItemsArray[0] = "No Items listed";
 		
-	}if (buttonUpperCase === "TAKE" + ItemsArray[1].name) {
+	}if (buttonUpperCase === ItemsArray[1].name) {
 		
 		PlayerInventory[1] = ItemsArray[1].toString();
 		
 		ItemsArray[1] = "No Items listed";
 		
-	}if (buttonUpperCase === "TAKE" + ItemsArray[2].name) {
+	}if (buttonUpperCase === ItemsArray[2].name) {
 		
 		PlayerInventory[2] = ItemsArray[2].toString();
 		
 		ItemsArray[2] = "No Items listed";
 		
-	}if (buttonUpperCase === "TAKE" + ItemsArray[3].name) {
+	}if (buttonUpperCase === ItemsArray[3].name) {
 		
 		PlayerInventory[3] = ItemsArray[3].toString();
 		
 		ItemsArray[3] = "No Items listed";
 		
-	}if (buttonUpperCase === "TAKE" + ItemsArray[4].name) {
+	}if (buttonUpperCase === ItemsArray[4].name) {
 		
 		PlayerInventory[4] = ItemsArray[4].toString();
 		
