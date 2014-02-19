@@ -64,22 +64,25 @@ The map for the 2D array
  };
  
 
- PlayerInventory = []
+ PlayerInventory = [];
  
  function takeItem(){
 	 
+	var emptyItems = Locals[currentLocation].items;
 	 
-	 if(Locals[currentLocation].item === "No Items here"){
+	 if(emptyItems.length == 0 ){
 	 	
-		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + "There are no items to take"
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + "There are no items to take";
 		
 	 }else{
+		 
+		var Element = emptyItems.items[0];
 	 	
-		PlayerInventory.push(ItemsArray[currentLocation].toString());
+		PlayerInventory.push(Element);
 		
-		Locals[currentLocation].item =  "No Items here";
+		Locals[currentLocation].items = [];
 		
-		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[currentLocation].name + " has been added to your inventory.";
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + Element.name + " has been added to your inventory.";
 	 }
  };
  
@@ -91,73 +94,59 @@ The map for the 2D array
 		Locals[0] = new Locale(0);
    		Locals[0].name = "Gallery Room";             
     	Locals[0].desc = "The room has several paintings, each of them are very beautiful."; 
-		Locals[0].item = "Priceless Rose Painting"; 
+		Locals[0].items = [new Items(0)];
+		Locals[0].items[0].name = "Priceless Rose Painting";
+		Locals[0].items[0].desc = "Worth a lot of money";
 	
 		Locals[1] = new Locale(1);
   		Locals[1].name = "Hallway";             
     	Locals[1].desc = "The room is a very Long Hallway, that leads to the kitchen or the gallery room."; 
-		Locals[1].item = "No Items here"; 
+		Locals[1].items = []; 
 	
 		Locals[2] = new Locale(2);
     	Locals[2].name = "Kitchen";             
     	Locals[2].desc = "The room is a beautiful kitchen with state of the art kitchenware, and delicious food"; 
-		Locals[2].item = "Gold Blender"; 
+		Locals[2].items = [new Items(2)];
+		Locals[2].items[0].name = "Gold Blender";
+		Locals[2].items[0].desc = "It\'s a blender dipped in gold, shouldn't be useful but looks good though";
 	
 		Locals[3] = new Locale(3);
     	Locals[3].name = "Living Room";             
     	Locals[3].desc = "The room is a Large living, with fancy and comfy couches."; 
-		Locals[3].item = "No Items here"; 
+		Locals[3].items = [];
 	
 		Locals[4] = new Locale(4);
     	Locals[4].name = "Atrium";             
     	Locals[4].desc = "The room is the center of the house, with a beautiful wood stairs leading to the second floor."; 
-		Locals[4].item = "No Items here"; 
+		Locals[4].items = []; 
 	
 		Locals[5] = new Locale(5);
     	Locals[5].name = "Television Room";             
     	Locals[5].desc = "The room has a large screen television set, with surround sound and 3D display settings."; 
-		Locals[5].item = "Large Flat Screen Television"; 
+		Locals[5].items = [new Items(5)]; 
+		Locals[5].items[0].name = "Large Flat Screen Television";
+		Locals[5].items[0].desc = "3D, LED and surround sound, what more could you want!";
 	
 		Locals[6] = new Locale(6);
     	Locals[6].name = "Guest Bath Room";             
     	Locals[6].desc = "The room is an amazing bathroom with a porcelain sink and bath tub, along with gold incrusted shower handels."; 
-		Locals[6].item = "Bar of Soap"; 
+		Locals[6].items = [new Items(6)]; 
+		Locals[6].items[0].name = "Bar of Soap";
+		Locals[6].items[0].desc = "Incase you felt like taking a bath, here'\s a bar of Soap";
 	
 		Locals[7] = new Locale(7);
     	Locals[7].name = "Front Porch";             
     	Locals[7].desc = "The room is a spacious porch, with a spectacular view."; 
-		Locals[7].item = "No Items here"; 
+		Locals[7].items = [];
 	
 		Locals[8] = new Locale(8);
     	Locals[8].name = "Winery";             
    	 	Locals[8].desc = "the room is a cellar filled with all types of expensive wine."; 
-		Locals[8].item = "Expenisve Bottle of CHATEAU LAFITE, 1787";
-		
-	ItemsArray = new Array();
-		
-		ItemsArray[0] = new Items(0);
-    	ItemsArray[0].name = "Priceless Rose Painting";             
-   	 	ItemsArray[0].desc = "Worth a lot of money"; 
-		
-		ItemsArray[1] = new Items(1);
-    	ItemsArray[1].name = "Gold Blender";             
-   	 	ItemsArray[1].desc = "It\'s a blender dipped in gold, shouldn't be useful but looks good though";
-		
-		ItemsArray[2] = new Items(2);
-    	ItemsArray[2].name = "Large Flat Screen Television";             
-   	 	ItemsArray[2].desc = "3D, LED and surround sound, what more could you want!";
-		
-		ItemsArray[3] = new Items(3);
-    	ItemsArray[3].name = "Bar of Soap";             
-   	 	ItemsArray[3].desc = "Incase you felt like taking a bath, here'\s a bar of Soap";
-		
-		ItemsArray[4] = new Items(4);
-    	ItemsArray[4].name = "Expenisve Bottle of CHATEAU LAFITE, 1787";             
-   	 	ItemsArray[4].desc = "worth more money than you can imagine, it would be a shame to waste good Wine.";
+		Locals[8].items = [new Items(8)];
+		Locals[8].items[0].name = "Expenisve Bottle of CHATEAU LAFITE, 1787";
+		Locals[8].items[0].desc = "worth more money than you can imagine, it would be a shame to waste good Wine.";
 		
 		
-		
-
  function displayOptions(){
 	 
 	document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + Locals[currentLocation].toString() + ' [Score = ' + score + '] ' + ' >> ';
@@ -172,13 +161,13 @@ The map for the 2D array
  
  function Locale(id){
  	
-	 this.id = id
-	 this.name = ""
-	 this.desc = ""
-	 this.item = ""
+	 this.id = id;
+	 this.name = "";
+	 this.desc = "";
+	 this.items = [];
 	 this.toString = function (){
 		 
-		  return "[Locale id = " + this.id + " name = " + this.name + " desc = " + this.desc + " items = " + this.item + "]";
+		  return "[Locale id = " + this.id + " name = " + this.name + " desc = " + this.desc + " items = " + this.items + "]";
 		 
 	 }
  };
@@ -313,7 +302,7 @@ function quitSimulation(){
 	<br/>
 	
 	<input type="text" id="userNavigationControler" size ="30" onkeydown="if (event.keyCode == 13) document.getElementById('goButton').click();"> 
-	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator();">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()"> &nbsp&nbsp&nbsp&nbsp&nbsp  <input type="button" id="Take Button" value = "Take ITem" onclick = "takeItem()"> 
+	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator();">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()"> &nbsp&nbsp&nbsp&nbsp&nbsp  <input type="button" id="Take Button" value = "Take Item" onclick = "takeItem()"> 
 	
 	<br/>
 	<br/>
