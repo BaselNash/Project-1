@@ -74,6 +74,16 @@ The map for the 2D array
  
  function takeItem(){
 	 
+	 
+	 if(Locals[currentLocation].item === "No Items here"){
+	 	
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + "There are no items to take"
+		
+	 }else{
+	 	
+		
+	 }
+	 
  	button = document.getElementById('userNavigationControler').value;
  	var buttonUpperCase = button.toUpperCase();
 	
