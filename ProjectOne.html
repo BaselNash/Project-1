@@ -7,10 +7,6 @@
 <title></title>
 
 <script>
-
-displayScreen = document.getElementById('displayScreen');
-
-
  
  var nav = [
  
@@ -29,6 +25,10 @@ displayScreen = document.getElementById('displayScreen');
  
  currentLocation = 1;
  
+ score = 0
+ 
+ var DisplayLocationArray = ["Gallery Room", "Hallway", "Kitchen", "Living Room", "Atrium", "Television Room", "Guest Bath Room", "Front Porch", "Winery"];
+ 
  function navigateTo(direction){
  	
 	var NewLocation = nav[currentLocation][direction];
@@ -38,15 +38,19 @@ displayScreen = document.getElementById('displayScreen');
 		
 		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + '(Invalid Move) ';
 		
+		score = score - 5;
+		
 	}else{
 		
 		currentLocation = NewLocation;
+		
+		score = score + 5;
 	}
 	
 	
  };
  
-/* 
+
  PlayerInventory = new Array();
  	
 	PlayerInventory[0] = ""
@@ -59,35 +63,35 @@ displayScreen = document.getElementById('displayScreen');
  	
 	if(buttonUpperCase === "TAKE" + ItemsArray[0].name) {
 		
-		PlayerInventory[0] = ItemsArray[0].name;
+		PlayerInventory[0] = ItemsArray[0].toString();
 		
 		ItemsArray[0] = "No Items listed";
 		
 	}if (buttonUpperCase === "TAKE" + ItemsArray[1].name) {
 		
-		PlayerInventory[1] = ItemsArray[1].name;
+		PlayerInventory[1] = ItemsArray[1].toString();
 		
 		ItemsArray[1] = "No Items listed";
 		
 	}if (buttonUpperCase === "TAKE" + ItemsArray[2].name) {
 		
-		PlayerInventory[2] = ItemsArray[2].name;
+		PlayerInventory[2] = ItemsArray[2].toString();
 		
 		ItemsArray[2] = "No Items listed";
 		
 	}if (buttonUpperCase === "TAKE" + ItemsArray[3].name) {
 		
-		PlayerInventory[3] = ItemsArray[3].name;
+		PlayerInventory[3] = ItemsArray[3].toString();
 		
 		ItemsArray[3] = "No Items listed";
 		
 	}if (buttonUpperCase === "TAKE" + ItemsArray[4].name) {
 		
-		PlayerInventory[4] = ItemsArray[4].name;
+		PlayerInventory[4] = ItemsArray[4].toString();
 		
 		ItemsArray[4] = "No Items listed";
-	
- };*/
+	}
+ };
  
  
 //new Array for ToString methode and for displaying the id, name, description, items.
@@ -166,19 +170,13 @@ displayScreen = document.getElementById('displayScreen');
 
  function displayOptions(){
 	 
-	document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + Locals[currentLocation].toString() + ' >> ';
+	document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + Locals[currentLocation].toString() + ' [Score = ' + score + '] ' + ' >> ';
 	
 	if(Locals[currentLocation].toString() === undefined || Locals[currentLocation].toString() === -1){
 		
 		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + ' <i style = "color:red">(This is an invalid type) <i> ' + 'Choose the appropriate text type, to see the types of commands enter \'d\',\'display\', or press the display button below'
 		
 	}
-	
- };
- 
- function displayScores(direction){
- 	
-	document.getElementById('displayScreen').innerHTML = n;
 	
  };
  
@@ -247,27 +245,34 @@ displayScreen = document.getElementById('displayScreen');
 		
 	}if(buttonUpperCase === "Q" || buttonUpperCase === "QUIT"){
 		
-		clearScreen();
+		quitSimulation()
 		
-	}else {
+	}if(buttonUpperCase === "I" || buttonUpperCase === "INVENTORY"){
 		
-		displayOptions();
+   	 for(var i = 0; i < PlayerInventory.length; i++){
+		
+   		 document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML +  i +  "-" + PlayerInventory[i] + " | ";
+   	}
+		
+		}/*else {
+		
+		document.getElementById('displayScreen').innerHTML = ' <i style = "color:red">(This is an invalid type) <i> ' + 'Choose the appropriate text type, to see the types of commands enter \'d\',\'display\', or press the display button below';
 	
-	};	
+	};	*/
 };
 
 function categorySelection(){
 	
 	 for(var i = 0; i < nav.length; i++){
 		
-		 document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML +  i +  "-" + Locals[currentLocation].toString() + " ";
+		 document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML +  i +  "-" + DisplayLocationArray[currentLocation] + " | ";
 	}
 	
 };
 
 function inti(){
 	
-	document.getElementById('displayScreen').innerHTML = 'Your First location is ' + Locals[currentLocation].toString();
+	document.getElementById('displayScreen').innerHTML = 'Your First location is ' + Locals[currentLocation].toString() + ' [Score = ' + score + '] ' + ' >> ';
 };
 
 function help(){
@@ -287,6 +292,8 @@ function quitSimulation(){
 	document.getElementById('displayScreen').innerHTML = 'Thank You For playing';
 	
 	currentLocation = 1;
+	
+	score = 0;
 	
 };
 
@@ -313,7 +320,7 @@ function quitSimulation(){
 	<br/>
 	
 	<input type="text" id="userNavigationControler" size ="30" onkeydown="if (event.keyCode == 13) document.getElementById('goButton').click();"> 
-	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator();">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()">
+	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator(); takeItem()">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()">
 	
 	<br/>
 	<br/>
