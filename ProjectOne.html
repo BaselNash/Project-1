@@ -81,7 +81,11 @@ The map for the 2D array
 		
 	 }else{
 	 	
+		PlayerInventory[0] = ItemsArray[0].toString();
 		
+		Locals[currentLocation].item =  "No Items here"
+		
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name + " has been added to your inventory.";
 	 }
 	 
  	button = document.getElementById('userNavigationControler').value;
