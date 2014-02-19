@@ -8,6 +8,19 @@
 
 <script>
  
+ 
+/*
+
+The map for the 2D array
+
+[6]	[7]	[8]			N
+
+[3]	[4]	[5]		W		E
+
+[0]	[1]	[2]			S
+
+*/
+ 
  var nav = [
  
  
@@ -63,36 +76,67 @@
 	 
  	button = document.getElementById('userNavigationControler').value;
  	var buttonUpperCase = button.toUpperCase();
+	
+	/*if(button === ItemsArray[currentLocation].name) {
+		
+			window.alert('jf jfj ');
+		
+			PlayerInventory[0] = ItemsArray[currentLocation].toString();
+		
+			ItemsArray[currentLocation] = "No Items listed";
+		
+			document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name " has been added to your inventory."*/
+	
  	
-	if(buttonUpperCase === ItemsArray[0].name) {
+	if(button == ItemsArray[0].name) {
+		
+		window.alert('jf jfj ');
 		
 		PlayerInventory[0] = ItemsArray[0].toString();
 		
 		ItemsArray[0] = "No Items listed";
 		
-	}if (buttonUpperCase === ItemsArray[1].name) {
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name " has been added to your inventory.";
+		
+	}if (button == ItemsArray[1].name) {
+		
+		window.alert('jf jfj ');
 		
 		PlayerInventory[1] = ItemsArray[1].toString();
 		
-		ItemsArray[1] = "No Items listed";
+		ItemsArray[1] === "No Items listed";
 		
-	}if (buttonUpperCase === ItemsArray[2].name) {
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[1].name " has been added to your inventory.";
+		
+	}if (button == ItemsArray[2].name) {
+		
+		window.alert('jf jfj ');
 		
 		PlayerInventory[2] = ItemsArray[2].toString();
 		
 		ItemsArray[2] = "No Items listed";
 		
-	}if (buttonUpperCase === ItemsArray[3].name) {
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[2].name " has been added to your inventory.";
+		
+	}if (button == ItemsArray[3].name) {
+		
+		window.alert('jf jfj ');
 		
 		PlayerInventory[3] = ItemsArray[3].toString();
 		
 		ItemsArray[3] = "No Items listed";
 		
-	}if (buttonUpperCase === ItemsArray[4].name) {
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[3].name " has been added to your inventory.";
+		
+	}if (button = ItemsArray[4].name) {
+		
+		window.alert('jf jfj ');
 		
 		PlayerInventory[4] = ItemsArray[4].toString();
 		
 		ItemsArray[4] = "No Items listed";
+		
+		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[4].name " has been added to your inventory."
 	}
  };
  
@@ -323,7 +367,7 @@ function quitSimulation(){
 	<br/>
 	
 	<input type="text" id="userNavigationControler" size ="30" onkeydown="if (event.keyCode == 13) document.getElementById('goButton').click();"> 
-	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator(); takeItem()">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()">
+	<input type="button" id="goButton" value = "Go" onclick = "typeNavigator();">	&nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="categoryButton" value = "Display Locations" onclick = "categorySelection();">  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="button" id="HelpButton" value = "Help" onclick = "help()"> &nbsp&nbsp&nbsp&nbsp&nbsp  <input type="button" id="Take Button" value = "Take ITem" onclick = "takeItem()"> 
 	
 	<br/>
 	<br/>
