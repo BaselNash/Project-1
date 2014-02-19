@@ -64,13 +64,7 @@ The map for the 2D array
  };
  
 
- PlayerInventory = new Array();
- 	
-	PlayerInventory[0] = ""
-	PlayerInventory[1] = ""
-	PlayerInventory[2] = ""
-	PlayerInventory[3] = ""
-	PlayerInventory[4] = ""
+ PlayerInventory = []
  
  function takeItem(){
 	 
@@ -81,14 +75,14 @@ The map for the 2D array
 		
 	 }else{
 	 	
-		PlayerInventory[0] = ItemsArray[0].toString();
+		PlayerInventory.push() = ItemsArray[0].toString();
 		
 		Locals[currentLocation].item =  "No Items here"
 		
 		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name + " has been added to your inventory.";
 	 }
 	 
- 	button = document.getElementById('userNavigationControler').value;
+ 	/*button = document.getElementById('userNavigationControler').value;
  	var buttonUpperCase = button.toUpperCase();
 	
 	/*if(button === ItemsArray[currentLocation].name) {
@@ -99,7 +93,7 @@ The map for the 2D array
 		
 			ItemsArray[currentLocation] = "No Items listed";
 		
-			document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name " has been added to your inventory."*/
+			document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[0].name " has been added to your inventory."
 	
  	
 	if(button == ItemsArray[0].name) {
@@ -151,7 +145,7 @@ The map for the 2D array
 		ItemsArray[4] = "No Items listed";
 		
 		document.getElementById('displayScreen').innerHTML = document.getElementById('displayScreen').innerHTML + " Item " + ItemsArray[4].name + " has been added to your inventory."
-	}
+	}*/
  };
  
  
