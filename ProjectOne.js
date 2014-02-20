@@ -274,7 +274,8 @@ The map for the 2D array
 		'\n' + '5- d or display' + '\n' + '5- t or take' + 
 		'\n' + '7- c or clear' + '\n' + '8- q or quit' + 
 		'\n' + 'For points, everytime you enter a room you get 5 points, but everytime you make a wrong move you lose 5 points.'; +
-		'\n' + 'inventory will display nothing, until you take an item';
+		'\n' + 'inventory will display nothing, until you take an item'; +
+		'\n' + '\n'; 
 	};
 
 	function clearScreen(){
