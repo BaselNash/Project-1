@@ -26,11 +26,11 @@
 	    }
 	    
 	    public Item getItem() {
-	    	return this.item;
+	    	return this.item[];
 	    }
 	    
 	    public void setItem(Item value) {
-	        this.item = value;
+	        this.item[] = value;
 	    }
 	    
 	    public String getDesc() {
@@ -52,12 +52,11 @@
 	        		"] ";
 	    }
 
-
 	    //
 	    // -- PRIVATE --
 	    //
 	    private int     id;
-	    private Item item;
+	    private Item[] item;
 	    private String  name;
 	    private String  desc;
 	}

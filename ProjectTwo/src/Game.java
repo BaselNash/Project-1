@@ -46,51 +46,51 @@ public class Game {
 		location0.setName("Main Entrance");
 		location0.setDesc("You are currently Entering the Witche\'s Lair.");
 		location0.setItem(ITEMS[0]);
-		// location0.setDangerLevel("10%");
+		//location0.setDangerLevel("10%");
 
 		Locale location1 = new Locale(1);
 		location1.setName("Hall of Keys");
 		location1.setDesc("There are keys hovering all around you.");
-		// location1.setDangerLevel("25%");
+		//location1.setDangerLevel("25%");
 
 		Locale location2 = new Locale(2);
 		location2.setName("Potions Room");
 		location2.setDesc("There are racks of potions, some might turn you into a frog.");
 		location0.setItem(ITEMS[2]);
-		// location2.setDangerLevel("80%");
+		//location2.setDangerLevel("80%");
 
 		Locale location3 = new Locale(3);
 		location3.setName("Broom Stick Storage");
 		location3.setDesc("A giant closet filled with flying broomsticks.");
 		location0.setItem(ITEMS[1]);
-		// location3.setDangerLevel("60%");
+		//location3.setDangerLevel("60%");
 
 		Locale location4 = new Locale(4);
 		location4.setName("Armory");
 		location4.setDesc("So much weaponry, this place is scary under the wrong hands.");
 		location0.setItem(ITEMS[4]);
-		// location4.setDangerLevel("75%");
+		//location4.setDangerLevel("75%");
 
 		Locale location5 = new Locale(5);
 		location5.setName("Dungeon");
 		location5.setDesc("A dungeon to keep all the animals and trespassers, so do not get caught.");
-		// location5.setDangerLevel("99.99999%");
+		//location5.setDangerLevel("99.99999%");
 
 		Locale location6 = new Locale(6);
 		location6.setName("Kitchen");
 		location6.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
-		// location6.setDangerLevel("0.2%");
+		//location6.setDangerLevel("0.2%");
 
 		Locale location7 = new Locale(7);
 		location7.setName("Cursed Items Room");
 		location7.setDesc("A room filled with strange objects, some of them smell funny.");
 		location0.setItem(ITEMS[3]);
-		// location7.setDangerLevel("90%");
+		//location7.setDangerLevel("90%");
 
 		Locale location8 = new Locale(8);
 		location8.setName("Magick Shoppe");
 		location8.setDesc("A place to purchase items.");
-		// location8.setDangerLevel("0.1%");
+		//location8.setDangerLevel("0.1%");
 
 		// set up the location array.
 		
@@ -144,7 +144,7 @@ public class Game {
 
 		navigationArray = new int[][] {
 
-		/* N S E W */
+						/* N S E W */
 		/* Location 0 */{ 1, -1, -1, -1 },
 		/* Location 1 */{ 4, 0, 3, 2 },
 		/* Location 2 */{ -1, -1, 1, -1 },
@@ -260,14 +260,18 @@ public class Game {
 		;
 	}
 
-	private static void takeItem() {
+	/*public static void takeItem() {
 		
+	if(ITEMS[currentLocale].length == 0) {
 		
-	}
+		}else{
+		
+		}
+	}*/
 
-	private static void DisplayMagickShoppeItems() {
+	//private static void DisplayMagickShoppeItems() {
 
-	}
+	//}
 
 	private static void quit() {
 
