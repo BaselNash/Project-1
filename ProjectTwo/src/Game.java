@@ -1,94 +1,126 @@
 import java.util.Scanner;
 
 public class Game {
-	
-	
-	//Global
-	
+
+	// Global
+
 	public static int currentLocale = 0;
 	public static String command;
 	public static boolean stillInTheGame = true;
-	public static Locale[] Locations;           
+	public static Locale[] Locations;
+	public static Item[] ITEMS;
 	public static int[][] navigationArray;
 	public static int moves = 0;
 	public static int score = 0;
 	public static Item[] PlayerInventory;
 	public static int points = 0;
 	public static int AchievementRatio = 0;
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		intialStart();
 		getCommand();
 		updateDisplay();
-		
-		// while Loop for the game; 
+
+		// while Loop for the game;
 		while (stillInTheGame) {
 			getCommand();
 			updateDisplay();
 			typeNavigation();
 		}
-		
+
 		System.out.println("Thank you for playing the game.");
 	}
-	
-	//Private methods, arrays, and such;
-	
-public static void intialStart() {
-		
-		//Intializing the intial commands
-		
+
+	// Private methods, arrays, and such;
+
+	public static void intialStart() {
+
+		// Intializing the intial commands
+
 		command = new String();
 		stillInTheGame = true;
-		
-		//Create the instance of locations
-		
+
+		// Create the instance of locations
+
 		Locale location0 = new Locale(0);
 		location0.setName("Main Entrance");
 		location0.setDesc("You are currently Entering the Witche\'s Lair.");
-		//location0.setDangerLevel("10%");
-		
+		location0.setItem(ITEMS[0]);
+		// location0.setDangerLevel("10%");
+
 		Locale location1 = new Locale(1);
 		location1.setName("Hall of Keys");
 		location1.setDesc("There are keys hovering all around you.");
-		//location1.setDangerLevel("25%");
-		
+		// location1.setDangerLevel("25%");
+
 		Locale location2 = new Locale(2);
 		location2.setName("Potions Room");
 		location2.setDesc("There are racks of potions, some might turn you into a frog.");
-		//location2.setDangerLevel("80%");
-		
+		location0.setItem(ITEMS[2]);
+		// location2.setDangerLevel("80%");
+
 		Locale location3 = new Locale(3);
 		location3.setName("Broom Stick Storage");
 		location3.setDesc("A giant closet filled with flying broomsticks.");
-		//location3.setDangerLevel("60%");
-		
+		location0.setItem(ITEMS[1]);
+		// location3.setDangerLevel("60%");
+
 		Locale location4 = new Locale(4);
 		location4.setName("Armory");
 		location4.setDesc("So much weaponry, this place is scary under the wrong hands.");
-		//location4.setDangerLevel("75%");
-		
+		location0.setItem(ITEMS[4]);
+		// location4.setDangerLevel("75%");
+
 		Locale location5 = new Locale(5);
 		location5.setName("Dungeon");
 		location5.setDesc("A dungeon to keep all the animals and trespassers, so do not get caught.");
-		//location5.setDangerLevel("99.99999%");
-		
+		// location5.setDangerLevel("99.99999%");
+
 		Locale location6 = new Locale(6);
 		location6.setName("Kitchen");
 		location6.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
-		//location6.setDangerLevel("0.2%");
-		
+		// location6.setDangerLevel("0.2%");
+
 		Locale location7 = new Locale(7);
 		location7.setName("Cursed Items Room");
 		location7.setDesc("A room filled with strange objects, some of them smell funny.");
-		//location7.setDangerLevel("90%");
-		
+		location0.setItem(ITEMS[3]);
+		// location7.setDangerLevel("90%");
+
 		Locale location8 = new Locale(8);
 		location8.setName("Magick Shoppe");
 		location8.setDesc("A place to purchase items.");
-		//location8.setDangerLevel("0.1%");
+		// location8.setDangerLevel("0.1%");
+
+		// set up the location array.
 		
-		//set up the location array.
+		Item gameItem1 = new Item(0);
+		gameItem1.setName("Map");
+		gameItem1.setDesc("A Map to help you through the lair");
 		
+		Item gameItem2 = new Item(1);
+		gameItem1.setName("Broom");
+		gameItem1.setDesc("A really cool broom to have, this one can fly");
+		
+		Item gameItem3 = new Item(2);
+		gameItem1.setName("Poison");
+		gameItem1.setDesc("Don\'t drink that!");
+		
+		Item gameItem4 = new Item(3);
+		gameItem1.setName("Cursed Item");
+		gameItem1.setDesc("Don\'t play around with that!");
+		
+		Item gameItem5 = new Item(4);
+		gameItem1.setName("Sharp Sword");
+		gameItem1.setDesc("A really useful thing to have, if the witch comes.");
+		
+		ITEMS = new Item[5];
+		ITEMS[0] = gameItem1;
+		ITEMS[1] = gameItem2;
+		ITEMS[2] = gameItem3;
+		ITEMS[3] = gameItem4;
+		ITEMS[4] = gameItem5;
+
 		Locations = new Locale[9];
 		Locations[0] = location0;
 		Locations[1] = location1;
@@ -99,128 +131,147 @@ public static void intialStart() {
 		Locations[6] = location6;
 		Locations[7] = location7;
 		Locations[8] = location8;
-		
+
 		System.out.println("All game locations:");
-	      for (int i = 0; i <Locations.length; ++i) {
-	         System.out.println(i + ":" + Locations[i].toString());
-	      };
+		for (int i = 0; i < Locations.length; ++i) {
+			System.out.println(i + ":" + Locations[i].toString());
+		}
+		;
+
+		// 2D array for the game,
 		
-	//2D array for the game, 	
 		
-	navigationArray = new int[][] {
-				 
-				    /*   N	S  E  W*/
-	/*Location 0*/		{1,-1,-1,-1},
-	/*Location 1*/		{4,0,3,2},
-	/*Location 2*/		{-1,-1,1,-1},
-	/*Location 3*/		{-1,-1,-1,1},
-	/*Location 4*/		{5,1,-1,-1},
-	/*Location 5*/		{8,4,7,6},
-	/*Location 6*/		{-1,-1,5,-1},
-	/*Location 7*/		{-1,-1,-1,5},
-	/*Location 8*/		{-1,5,-1,-1}
-	 
-		 };
+
+		navigationArray = new int[][] {
+
+		/* N S E W */
+		/* Location 0 */{ 1, -1, -1, -1 },
+		/* Location 1 */{ 4, 0, 3, 2 },
+		/* Location 2 */{ -1, -1, 1, -1 },
+		/* Location 3 */{ -1, -1, -1, 1 },
+		/* Location 4 */{ 5, 1, -1, -1 },
+		/* Location 5 */{ 8, 4, 7, 6 },
+		/* Location 6 */{ -1, -1, 5, -1 },
+		/* Location 7 */{ -1, -1, -1, 5 },
+		/* Location 8 */{ -1, 5, -1, -1 }
+
+		};
 	};
-	
-	private static void typeNavigation(){
-		
-		int dir = -1; // The Intial position > 0 which starts the position of the game.
-			
-			// if statement for the locations
-		
-		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n") ){
+
+	private static void typeNavigation() {
+
+		int dir = -1; // The Intial position > 0 which starts the position of
+						// the game.
+
+		// if statement for the locations
+
+		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
 			dir = 0;
-		}else if (command.equalsIgnoreCase("south") || command.equalsIgnoreCase("s") ){
+		} else if (command.equalsIgnoreCase("south")
+				|| command.equalsIgnoreCase("s")) {
 			dir = 1;
-		}else if (command.equalsIgnoreCase("east") || command.equalsIgnoreCase("e") ){
+		} else if (command.equalsIgnoreCase("east")
+				|| command.equalsIgnoreCase("e")) {
 			dir = 2;
-		}else if (command.equalsIgnoreCase("west") || command.equalsIgnoreCase("w") ){
+		} else if (command.equalsIgnoreCase("west")
+				|| command.equalsIgnoreCase("w")) {
 			dir = 3;
-		}else if(command.equalsIgnoreCase("help") || command.equalsIgnoreCase("h") ){
-			help();	
-		}else if(command.equalsIgnoreCase("map") || command.equalsIgnoreCase("m") ){
-			map();	
-		}else if(command.equalsIgnoreCase("inventory") || command.equalsIgnoreCase("i") ){
-			playerInventory();	
-		}else if(command.equalsIgnoreCase("take") || command.equalsIgnoreCase("t") ){
-			help();	
-		}else if(command.equalsIgnoreCase("Magick Shoppe") || command.equalsIgnoreCase("ms") ){
-			help();	
-		}else if(command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("q") ){
-			quit();	
-		}else{
-			System.out.println("The command that you have just placed is incorrect");
-			 help();
+		} else if (command.equalsIgnoreCase("help")
+				|| command.equalsIgnoreCase("h")) {
+			help();
+		} else if (command.equalsIgnoreCase("map")
+				|| command.equalsIgnoreCase("m")) {
+			map();
+		} else if (command.equalsIgnoreCase("inventory")
+				|| command.equalsIgnoreCase("i")) {
+			playerInventory();
+		} else if (command.equalsIgnoreCase("take")
+				|| command.equalsIgnoreCase("t")) {
+			help();
+		} else if (command.equalsIgnoreCase("Magick Shoppe")
+				|| command.equalsIgnoreCase("ms")) {
+			help();
+		} else if (command.equalsIgnoreCase("quit")
+				|| command.equalsIgnoreCase("q")) {
+			quit();
+		} else {
+			System.out
+					.println("The command that you have just placed is incorrect");
+			help();
 		}
-		
+
 		// if statement for the NewLocation
-		
+
 		if (dir > -1) {
-			
+
 			int NewLocation = navigationArray[currentLocale][dir];
-			if (NewLocation == -1){
+			if (NewLocation == -1) {
 				System.out.println("Invalid Move! Try Again");
-			}else{
+			} else {
 				currentLocale = NewLocation;
-                moves = moves + 1;
-                points = points + 5;
-                AchievementRatio = points/moves;
-			}	
+				moves = moves + 1;
+				points = points + 5;
+				AchievementRatio = points / moves;
+			}
 		}
 	}
-	
+
 	private static void help() {
-        System.out.println("Theses are the commands that you can type in:-");
-        System.out.println("   North or N");
-        System.out.println("   South or S");
-        System.out.println("   West or W");
-        System.out.println("   East or E");
-        System.out.println("   Help or H");
-        System.out.println("   Inventory or I");
-        System.out.println("   Map or M");
-        System.out.println("   Quit or Q");
-    }
-	
-	public static void updateDisplay(){
-	
-	System.out.println(Locations[currentLocale].getInfo());
-	
+		System.out.println("Theses are the commands that you can type in:-");
+		System.out.println("   North or N");
+		System.out.println("   South or S");
+		System.out.println("   West or W");
+		System.out.println("   East or E");
+		System.out.println("   Help or H");
+		System.out.println("   Inventory or I");
+		System.out.println("   Map or M");
+		System.out.println("   Quit or Q");
 	}
-	
-	public static void map(){
-		
+
+	public static void updateDisplay() {
+
+		System.out.println(Locations[currentLocale].getInfo());
+
+	}
+
+	public static void map() {
+
 		System.out.println("    [8]");
 		System.out.println("[6] [5]	[7]");
 		System.out.println("    [4]	");
 		System.out.println("[2] [1]	[3]");
 		System.out.println("    [0]");
+
+	}
+
+	private static void getCommand() {
+		System.out.println("[ " + moves + "moves, score, " + score
+				+ " AchievementRatio " + AchievementRatio + "] ");
+		Scanner inputReader = new Scanner(System.in);
+		command = inputReader.nextLine();
+
+	}
+
+	private static void playerInventory() {
+		System.out.println("Player Inventory");
+		for (int i = 0; i < PlayerInventory.length; ++i) {
+			System.out.println(i + ":" + PlayerInventory[i]);
+		}
+		;
+	}
+
+	private static void takeItem() {
 		
-		}
-	
-	 private static void getCommand() {
-		 System.out.println("[ " + moves + "moves, score " + score + "AchievementRatio " + AchievementRatio +"] ");
-	     Scanner inputReader = new Scanner(System.in);
-	     command = inputReader.nextLine();
-	     
+		
 	}
-	 
-	 private static void playerInventory() {
-		 System.out.println("Player Inventory");
-	      for (int i = 0; i <PlayerInventory.length; ++i) {
-	         System.out.println(i + ":" + PlayerInventory[i]);
-	      };
+
+	private static void DisplayMagickShoppeItems() {
+
 	}
-	 
-	 private static void DisplayMagickShoppeItems() {
-		 
+
+	private static void quit() {
+
+		stillInTheGame = false;
+
 	}
-	 
-	 private static void quit() {
-		 
-		 stillInTheGame = false;
-		 
-		}
-	 
-	 
 };
