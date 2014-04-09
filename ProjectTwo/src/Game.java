@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Game {
@@ -82,6 +83,33 @@ public class Game {
 		Item gameItem5 = new Item(4);
 		gameItem5.setName("Sharp Sword");
 		gameItem5.setDesc("A really useful thing to have, if the witch comes.");
+		
+		// instances of Money "cha ching$$$$"
+		
+		Currency enchantedSapphires0 = new Currency(0);
+		enchantedSapphires0.setValue(23);
+		
+		Currency enchantedSapphires1 = new Currency(1);
+		enchantedSapphires1.setValue(143);
+		
+		Currency enchantedSapphires2 = new Currency(2);
+		enchantedSapphires2.setValue(652);
+		
+		Currency enchantedSapphires3 = new Currency(3);
+		enchantedSapphires3.setValue(54);
+		
+		Currency enchantedSapphires4 = new Currency(4);
+		enchantedSapphires4.setValue(723);
+		
+		Currency enchantedSapphires5 = new Currency(5);
+		enchantedSapphires5.setValue(450);
+		
+		Currency enchantedSapphires6 = new Currency(6);
+		enchantedSapphires6.setValue(18);
+		
+		Currency enchantedSapphires7 = new Currency(7);
+		enchantedSapphires7.setValue(87);
+		
 
 		// Create the instance of locations
 
@@ -220,6 +248,141 @@ public class Game {
 		/* Location 7 */{ -1, -1, -1, 5 },
 		/* Location 8 */{ -1, 5, -1, -1 } };
 	};
+	
+	
+	public static void ReadMagicItemsAndPromptUser(){
+		
+		// creating the list manager, classified as listMan1
+		
+		listMan listMan1 = new listMan();
+		listMan1.setName("Magic Items");
+		listMan1.setDesc("Enchanted Items that seem both cool and scary.");
+		
+		final String fileName = "magicItems.txt";
+		
+		readmagicItemsFromFileToList(fileName, listMan1);
+		
+		//Managing the array for to hold the items. The array is called items
+		
+		ListItem[] items = new ListItem[listMan1.getLength()]; //.getLength method can be found in listMan.
+		readMagicItemsFromFileToArray(fileName, items);
+		
+		// Displaying the items in the array on the command line. Using a for loop
+		
+		for (int i = 0 ; i < items.length ; i++) {
+			if (items[i] != null) {
+				System.out.println(items[i].toString());
+			}
+		}
+		 
+		// Prompt the user, to select an item.
+		
+		 Scanner inputReader = new Scanner(System.in);
+	        System.out.print("What item would you like? ");
+	        String targetItem = new String();
+	        targetItem = inputReader.nextLine();
+	        System.out.println();
+
+	        ListItem li = new ListItem();
+	        li = LinearSearch(listMan1, targetItem);
+	        if (li != null) {
+	            System.out.println(li.toString());
+	        }
+		 
+	}
+	
+	//Magic Item methods
+	
+	//First method is read through the magic Items and find the users choice
+	
+	private static ListItem LinearSearch(listMan lm, String targetItem){
+		
+		ListItem retVal = null;
+        System.out.println("Searching for " + targetItem + ".");
+        int magicItemCounter = 0; //Counts the number of searches through each item. 
+        ListItem currentItem = new ListItem();
+        currentItem = lm.getHead();
+        boolean isFound = false;
+        while ( (!isFound) && (currentItem != null) ) {
+        	magicItemCounter = magicItemCounter +1;
+            if (currentItem.getName().equalsIgnoreCase(targetItem)) {
+                // We found it!
+                isFound = true;
+                retVal = currentItem;
+            } else {
+                // Keep looking.
+                currentItem = currentItem.getNext();
+            }
+        }
+        if (isFound) {
+            System.out.println("Found " + targetItem + " after " + magicItemCounter + " comparisons.");
+            return  currentItem;
+        } else {
+            System.out.println("Could not find " + targetItem + " in " + magicItemCounter + " comparisons.");
+        }
+
+        return retVal;
+	}
+	
+	//Second method is to read the magic items from the file to the list.
+	
+	private static void readmagicItemsFromFileToList(String fileName, listMan lm){
+		
+		File myFile = new File(fileName);
+        try {
+            Scanner input = new Scanner(myFile);
+            while (input.hasNext()) {
+                // Read a line from the file.
+                String itemName = input.nextLine();
+
+                // Construct a new list item and set its attributes.
+                ListItem fileItem = new ListItem();
+                fileItem.setName(itemName);
+                fileItem.setCost(Math.random() * 100); // random pricing.
+                fileItem.setNext(null);
+
+                // Add the newly constructed item to the list.
+                lm.LinkToList(fileItem);
+            }
+	            // Closing the magicItems file 
+	            input.close();
+		 } catch (FileNotFoundException ex) {
+			 System.out.println("File not found. " + ex.toString());
+		 }
+		 
+	}
+	
+	//Third method is to read the magic items from the file to the list.
+	private static void readMagicItemsFromFileToArray(String fileName, ListItem[] items) {
+		
+		  File myFile = new File(fileName);
+	        try {
+	            int itemCount = 0;
+	            Scanner input = new Scanner(myFile);
+
+	            while (input.hasNext() && itemCount < items.length) {
+	                // Read a line from the file.
+	                String itemName = input.nextLine();
+
+	                // Construct a new list item and set its attributes.
+	                ListItem fileItem = new ListItem();
+	                fileItem.setName(itemName);
+	                fileItem.setCost(Math.random() * 100); // random pricing.
+	                fileItem.setNext(null);
+
+	                // Add the newly constructed item to the array.
+	                items[itemCount] = fileItem;
+	                itemCount = itemCount + 1;
+	            }
+	            // Close the file.
+	            input.close();
+	        } catch (FileNotFoundException ex) {
+	            System.out.println("File not found. " + ex.toString());
+	        }
+	}
+	
+	
+	
 
 	private static void help() {
 		System.out.println("Theses are the commands that you can type in:-");
@@ -272,7 +435,7 @@ public class Game {
 
 		if (currentLocale == 8) {
 
-			DisplayMagickShoppeItems();
+			ReadMagicItemsAndPromptUser();
 		}
 
 	}

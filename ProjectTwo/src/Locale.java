@@ -43,6 +43,14 @@ public class Locale {
 	public void setDesc(String value) {
 		this.desc = value;
 	}
+	
+	public Locale getNext() {
+	    return next;
+	}
+	
+	public void setNext(Locale next) {
+	    this.next = next;
+	}
 
 	// Other methods
 	public String toString() {
@@ -58,4 +66,5 @@ public class Locale {
 	private Item[] items;
 	private String name;
 	private String desc;
+	private Locale next = null;
 }
