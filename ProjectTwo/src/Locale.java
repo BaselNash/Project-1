@@ -44,6 +44,14 @@ public class Locale {
 		this.desc = value;
 	}
 	
+	public int getMoney() {
+		return this.money;
+	}
+	
+	public void setMoney(int value) {
+		this.money = value;
+	}
+	
 	// ---------------------------------------------
 	
 	public Locale getNorth() {
@@ -101,6 +109,7 @@ public class Locale {
 	
 	private int id;
 	private Item[] items;
+	private int money;
 	private String name;
 	private String desc;
 	private Locale north;

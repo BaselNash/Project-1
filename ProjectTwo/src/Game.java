@@ -7,16 +7,18 @@ public class Game {
 
 	public static Locale currentLocale;
 	public static String command;
+	public static String decision;
 	public static boolean stillInTheGame = true;
 	public static Locale[] Locations;
 	public static Item[] ITEMS;
 	public static int[][] navigationArray;
 	public static int moves = 0;
 	public static int score = 0;
-	public static Item[] PlayerInventory = new Item[5];
+	public static Item[] PlayerInventory = new Item[671];
 	public static int points = 0;
 	public static int AchievementRatio = 0;
 	public static int playerInventorySize = 0;
+	public static int playerBank = 0;
 	public static Item[] magickShoppe;
 
 	public static void main(String[] args) {
@@ -113,61 +115,68 @@ public class Game {
 
 		// Create the instance of locations
 		
-		
-
 		Danger location0 = new Danger(0);
 		location0.setName("Main Entrance");
 		location0.setDesc("You are Entering the Witche\'s Lair.");
 		location0.setItems(new Item[] { gameItem1 });
 		location0.setDangerLevel("10%");
+		location0.setMoney(23);
 
 		Danger location1 = new Danger(1);
 		location1.setName("Hall of Keys");
 		location1.setDesc("There are keys hovering all around you.");
 		location1.setItems(new Item[] {});
 		location1.setDangerLevel("25%");
+		location1.setMoney(143);
 		
 		Danger location2 = new Danger(2);
 		location2.setName("Potions Room");
 		location2.setDesc("There are racks of potions, some might turn you into a frog.");
 		location2.setItems(new Item[] { gameItem3 });
 		location2.setDangerLevel("80%");
+		location2.setMoney(652);
 
 		Danger location3 = new Danger(3);
 		location3.setName("Broom Stick Storage");
 		location3.setDesc("A giant closet filled with flying broomsticks.");
 		location3.setItems(new Item[] { gameItem2 });
 		location3.setDangerLevel("60%");
+		location3.setMoney(54);
 
 		Danger location4 = new Danger(4);
 		location4.setName("Armory");
 		location4.setDesc("So much weaponry, this place is scary under the wrong hands.");
 		location4.setItems(new Item[] { gameItem5 });
 		location4.setDangerLevel("75%");
+		location4.setMoney(723);
 
 		Danger location5 = new Danger(5);
 		location5.setName("Dungeon");
 		location5.setDesc("A dungeon to keep all the animals and trespassers, so do not get caught.");
 		location5.setItems(new Item[] {});
 		location5.setDangerLevel("99.99999%");
+		location5.setMoney(450);
 
 		Danger location6 = new Danger(6);
 		location6.setName("Kitchen");
 		location6.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
 		location6.setItems(new Item[] {});
 		location6.setDangerLevel("0.2%");
+		location6.setMoney(18);
 
 		Danger location7 = new Danger(7);
 		location7.setName("Cursed Items Room");
 		location7.setDesc("A room filled with strange objects, some of them smell funny.");
 		location7.setItems(new Item[] { gameItem4 });
 		location7.setDangerLevel("90%");
+		location7.setMoney(87);
 
 		Danger location8 = new Danger(8);
 		location8.setName("Magick Shoppe");
 		location8.setDesc("A place to purchase items.");
 		location8.setItems(new Item[] {});
 		location8.setDangerLevel("0.1%");
+		location8.setMoney(200);
 		
 		// Location Links 
 		
@@ -316,7 +325,18 @@ public class Game {
         }
         if (isFound) {
             System.out.println("Found " + targetItem + " after " + magicItemCounter + " comparisons.");
+            	Scanner inputReader = new Scanner(System.in);
+            	decision = inputReader.nextLine();
+            	System.out.println("Would you like to purchase this item? Y or N");
+            		if(decision.equalsIgnoreCase("Y") || decision.equalsIgnoreCase("yes") && playerBank > currentItem.getCost() ) {
+            			
+            			PlayerInventory[playerInventorySize] = currentItem.getName();
+
+            			playerInventorySize = playerInventorySize + 1;
+            		}
             return  currentItem;
+           
+            
         } else {
             System.out.println("Could not find " + targetItem + " in " + magicItemCounter + " comparisons.");
         }
@@ -380,9 +400,6 @@ public class Game {
 	            System.out.println("File not found. " + ex.toString());
 	        }
 	}
-	
-	
-	
 
 	private static void help() {
 		System.out.println("Theses are the commands that you can type in:-");
@@ -397,8 +414,6 @@ public class Game {
 	}
 
 	public static void directionsYouCanGo() {
-		
-		currentLocale = 
 
 		Locale northDirection = currentLocale.getNorth();
 		Locale southDirection = currentLocale.getSouth();
@@ -444,7 +459,7 @@ public class Game {
 
 	private static void typeNavigation() {
 
-		int direction = -1; // The Intial position > 0 which starts the position
+							// The Intial position > 0 which starts the position
 							// of
 							// the game.
 
@@ -478,13 +493,13 @@ public class Game {
 		} else if (command.equalsIgnoreCase("inventory")
 				|| command.equalsIgnoreCase("i")) {
 			playerInventory();
-		} else if (command.equalsIgnoreCase("take")
-				|| command.equalsIgnoreCase("t")) {
+		} else if (command.equalsIgnoreCase("take item")
+				|| command.equalsIgnoreCase("ti")) {
 			takeItem();
-		} else if (command.equalsIgnoreCase("Magick Shoppe")
-				|| command.equalsIgnoreCase("ms")) {
-			DisplayMagickShoppeItems();
-		} else if (command.equalsIgnoreCase("quit")
+		} else if (command.equalsIgnoreCase("take money")
+				|| command.equalsIgnoreCase("tm")) {
+			takeMoney();
+		}else if (command.equalsIgnoreCase("quit")
 				|| command.equalsIgnoreCase("q")) {
 			quit();
 		} else {
@@ -495,8 +510,6 @@ public class Game {
 
 		// if statement for the NewLocation
 
-		if (direction > -1) {
-
 			if (currentLocale == null) {
 				System.out.println("Invalid Move! Try Again");
 
@@ -506,7 +519,6 @@ public class Game {
 				points = points + 5;
 				AchievementRatio = points / moves;
 			}
-		}
 	}
 
 	public static void map() {
@@ -542,6 +554,16 @@ public class Game {
 			}
 		}
 	}
+	
+	private static void takeMoney() {
+		
+		int locationMoney = currentLocale.getMoney();
+		
+		playerBank = playerBank + locationMoney;
+		
+		System.out.println("You have taken:" + locationMoney + " Sapphires. Your bank Contains" + playerBank + "Sapphires.");
+		
+	}
 
 	public static void takeItem() {
 
@@ -562,15 +584,6 @@ public class Game {
 			System.out.println("you have taken item:" + locationItem);
 		}
 
-	}
-
-	private static void DisplayMagickShoppeItems() {
-
-		for (int item = 0; item < magickShoppe.length; item++) {
-
-			System.out.println(magickShoppe[item].toString());
-
-		}
 	}
 
 	private static void quit() {
