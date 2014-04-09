@@ -1,8 +1,8 @@
-public class listMan {
+public class ListMan {
 
 	// public
 
-	public listMan() {
+	public ListMan() {
 	}
 
 	public String getName() {
@@ -44,7 +44,7 @@ public class listMan {
 		return this.length;
 	}
 
-	public void LinkToList(ListItem items) {
+	public void add(ListItem items) {
 
 		if (this.head == null) {
 

@@ -35,6 +35,15 @@ public class ListItem {
 	public void setNext(ListItem next) {
 	    this.next = next;
 	}
+	
+	// Methods
+	
+	@Override
+    public String toString() {
+        return "[ListItem name=" + this.name
+                + " desc=" + this.desc
+                + " cost= " + this.cost + "]";
+    }
 
 	// Private
 

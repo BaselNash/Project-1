@@ -5,7 +5,7 @@ public class Game {
 
 	// Global
 
-	public static int currentLocale = 0;
+	public static Locale currentLocale;
 	public static String command;
 	public static boolean stillInTheGame = true;
 	public static Locale[] Locations;
@@ -112,6 +112,8 @@ public class Game {
 		
 
 		// Create the instance of locations
+		
+		
 
 		Danger location0 = new Danger(0);
 		location0.setName("Main Entrance");
@@ -124,7 +126,7 @@ public class Game {
 		location1.setDesc("There are keys hovering all around you.");
 		location1.setItems(new Item[] {});
 		location1.setDangerLevel("25%");
-
+		
 		Danger location2 = new Danger(2);
 		location2.setName("Potions Room");
 		location2.setDesc("There are racks of potions, some might turn you into a frog.");
@@ -166,45 +168,43 @@ public class Game {
 		location8.setDesc("A place to purchase items.");
 		location8.setItems(new Item[] {});
 		location8.setDangerLevel("0.1%");
-
-		// Items in magick shoope
-
-		Item magickShoppeItem1 = new Item(0);
-		magickShoppeItem1.setName("Cloak of Invisibility");
-		magickShoppeItem1.setDesc("Hides you from your enemies. 67.00$");
-
-		Item magickShoppeItem2 = new Item(1);
-		magickShoppeItem2.setName("Ring of Power");
-		magickShoppeItem2.setDesc("Grants you unlimited source of power. 1000.54$");
-
-		Item magickShoppeItem3 = new Item(2);
-		magickShoppeItem3.setName("Magic Beans");
-		magickShoppeItem3.setDesc("Creates a magical tree. 23.00$");
-
-		Item magickShoppeItem4 = new Item(3);
-		magickShoppeItem4.setName("Luminating Sword");
-		magickShoppeItem4.setDesc("A sharp sword with the ability to light up a room. 44.00$");
-
-		Item magickShoppeItem5 = new Item(4);
-		magickShoppeItem5.setName("Orb of Wisdom");
-		magickShoppeItem5.setDesc("A type of crystal ball, used for telling the future. 67.99$");
-
-		Item magickShoppeItem6 = new Item(5);
-		magickShoppeItem6.setName("Water Staff");
-		magickShoppeItem6.setDesc("Useful for conjuring water from air. 33.00$");
-
-		Item magickShoppeItem7 = new Item(6);
-		magickShoppeItem7.setName("Book of Spells");
-		magickShoppeItem7.setDesc("All the spells you can ever think of are in the book. 130.00$");
-
-		magickShoppe = new Item[7];
-		magickShoppe[0] = magickShoppeItem1;
-		magickShoppe[1] = magickShoppeItem2;
-		magickShoppe[2] = magickShoppeItem3;
-		magickShoppe[3] = magickShoppeItem4;
-		magickShoppe[4] = magickShoppeItem5;
-		magickShoppe[5] = magickShoppeItem6;
-		magickShoppe[6] = magickShoppeItem7;
+		
+		// Location Links 
+		
+		// Main Entrance
+		location0.setNorth(location1);
+		
+		// Hall of Keys
+		location1.setNorth(location4);
+		location1.setEast(location3);
+		location1.setWest(location2);
+		location1.setSouth(location0);
+		
+		//Broom Stick Storage
+		location2.setEast(location1);
+		
+		//Armory
+		location3.setWest(location1);
+		
+		//Dungeon
+		location4.setNorth(location5);
+		location4.setSouth(location1);
+		
+		//Dungeon
+		location5.setNorth(location8);
+		location5.setEast(location7);
+		location5.setWest(location6);
+		location5.setSouth(location4);
+		
+		//Kitchen
+		location6.setEast(location5);
+		
+		//Cursed Items Room
+		location7.setWest(location5);
+		
+		location8.setSouth(location5);
+		
+		currentLocale = location0;
 
 		// set up the location array.
 
@@ -229,24 +229,24 @@ public class Game {
 		}
 
 		System.out.println();
-		System.out.println("You are currently in" + Locations[currentLocale]);
+		System.out.println("You are currently in" + currentLocale);
 		System.out.println();
 		System.out.println("Press any key to begin");
 
 		// 2D array for the game,
 
-		navigationArray = new int[][] {
+		//navigationArray = new int[][] {
 
 		/* N S E W */
-		/* Location 0 */{ 1, -1, -1, -1 },
-		/* Location 1 */{ 4, 0, 3, 2 },
-		/* Location 2 */{ -1, -1, 1, -1 },
-		/* Location 3 */{ -1, -1, -1, 1 },
-		/* Location 4 */{ 5, 1, -1, -1 },
-		/* Location 5 */{ 8, 4, 7, 6 },
-		/* Location 6 */{ -1, -1, 5, -1 },
-		/* Location 7 */{ -1, -1, -1, 5 },
-		/* Location 8 */{ -1, 5, -1, -1 } };
+		/* Location 0 */ //{ 1, -1, -1, -1 },
+		/* Location 1 */ //{ 4, 0, 3, 2 },
+		/* Location 2 */ //{ -1, -1, 1, -1 },
+		/* Location 3 */ //{ -1, -1, -1, 1 },
+		/* Location 4 */ //{ 5, 1, -1, -1 },
+		/* Location 5 */ //{ 8, 4, 7, 6 },
+		/* Location 6 */ //{ -1, -1, 5, -1 },
+		/* Location 7 */ //{ -1, -1, -1, 5 },
+		/* Location 8 */ //{ -1, 5, -1, -1 } };
 	};
 	
 	
@@ -254,7 +254,7 @@ public class Game {
 		
 		// creating the list manager, classified as listMan1
 		
-		listMan listMan1 = new listMan();
+		ListMan listMan1 = new ListMan();
 		listMan1.setName("Magic Items");
 		listMan1.setDesc("Enchanted Items that seem both cool and scary.");
 		
@@ -295,7 +295,7 @@ public class Game {
 	
 	//First method is read through the magic Items and find the users choice
 	
-	private static ListItem LinearSearch(listMan lm, String targetItem){
+	private static ListItem LinearSearch(ListMan lm, String targetItem){
 		
 		ListItem retVal = null;
         System.out.println("Searching for " + targetItem + ".");
@@ -326,7 +326,7 @@ public class Game {
 	
 	//Second method is to read the magic items from the file to the list.
 	
-	private static void readmagicItemsFromFileToList(String fileName, listMan lm){
+	private static void readmagicItemsFromFileToList(String fileName, ListMan lm){
 		
 		File myFile = new File(fileName);
         try {
@@ -342,7 +342,7 @@ public class Game {
                 fileItem.setNext(null);
 
                 // Add the newly constructed item to the list.
-                lm.LinkToList(fileItem);
+                lm.add(fileItem);
             }
 	            // Closing the magicItems file 
 	            input.close();
@@ -397,30 +397,32 @@ public class Game {
 	}
 
 	public static void directionsYouCanGo() {
+		
+		currentLocale = 
 
-		int northDirection = navigationArray[currentLocale][0];
-		int southDirection = navigationArray[currentLocale][1];
-		int eastDirection = navigationArray[currentLocale][2];
-		int westDirection = navigationArray[currentLocale][3];
+		Locale northDirection = currentLocale.getNorth();
+		Locale southDirection = currentLocale.getSouth();
+		Locale eastDirection = currentLocale.getEast();
+		Locale westDirection = currentLocale.getWest();
 
 		System.out.print("You can move ");
 
-		if (northDirection != -1) {
+		if (northDirection != null) {
 
 			System.out.print("North, ");
 
 		}
-		if (southDirection != -1) {
+		if (southDirection != null) {
 
 			System.out.print("South, ");
 
 		}
-		if (eastDirection != -1) {
+		if (eastDirection != null) {
 
 			System.out.print("East, ");
 
 		}
-		if (westDirection != -1) {
+		if (westDirection != null) {
 
 			System.out.print("West, ");
 
@@ -431,9 +433,9 @@ public class Game {
 
 	public static void updateDisplay() {
 
-		System.out.println(Locations[currentLocale].getInfo());
+		System.out.println(currentLocale.getInfo());
 
-		if (currentLocale == 8) {
+		if (currentLocale.getId() == 8) {
 
 			ReadMagicItemsAndPromptUser();
 		}
@@ -444,21 +446,29 @@ public class Game {
 
 		int direction = -1; // The Intial position > 0 which starts the position
 							// of
-		// the game.
+							// the game.
 
-		// if statement for the locations
+		// if statement for the locations and commands
 
 		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
-			direction = 0;
+			
+			currentLocale.getNorth();
+			
 		} else if (command.equalsIgnoreCase("south")
 				|| command.equalsIgnoreCase("s")) {
-			direction = 1;
+			
+			currentLocale.getSouth();
+			
 		} else if (command.equalsIgnoreCase("east")
 				|| command.equalsIgnoreCase("e")) {
-			direction = 2;
+			
+			currentLocale.getEast();
+			
 		} else if (command.equalsIgnoreCase("west")
 				|| command.equalsIgnoreCase("w")) {
-			direction = 3;
+			
+			currentLocale.getWest();
+			
 		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
 			help();
@@ -487,12 +497,11 @@ public class Game {
 
 		if (direction > -1) {
 
-			int NewLocation = navigationArray[currentLocale][direction];
-			if (NewLocation == -1) {
+			if (currentLocale == null) {
 				System.out.println("Invalid Move! Try Again");
 
 			} else {
-				currentLocale = NewLocation;
+				
 				moves = moves + 1;
 				points = points + 5;
 				AchievementRatio = points / moves;
@@ -536,21 +545,19 @@ public class Game {
 
 	public static void takeItem() {
 
-		Locale currentLocation = Locations[currentLocale];
-
-		if (currentLocation.getItems().length == 0) {
+		if (currentLocale.getItems().length == 0) {
 
 			System.out.println("There are no items to take");
 
 		} else {
 
-			Item locationItem = currentLocation.getItems()[0];
+			Item locationItem = currentLocale.getItems()[0];
 
 			PlayerInventory[playerInventorySize] = locationItem;
 
 			playerInventorySize = playerInventorySize + 1;
 
-			currentLocation.setItems(new Item[] {});
+			currentLocale.setItems(new Item[] {});
 
 			System.out.println("you have taken item:" + locationItem);
 		}

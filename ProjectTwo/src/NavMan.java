@@ -23,6 +23,35 @@ public class NavMan {
 		this.tail = tail;
 	}
 	
+	public Locale goSouth (Locale location) {
+		
+		if (this.head == null) {
+
+			this.head = location;
+			this.tail = location;
+			
+		}else{
+			
+			this.tail.setNext(location);	
+			this.tail = location;
+		}
+	}
+		
+ 
+	public Locale goNorth() {
+		
+	}
+	
+	public Locale goWest() {
+		
+	}
+	
+	public Locale goEast() {
+		
+	}
+	
+	
+	
 	//Private 
 		
 	private Locale head = null;
