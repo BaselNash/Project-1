@@ -17,7 +17,8 @@ public class Locale {
 	public String getInfo() {
 
 		return this.name + "\n" + this.desc + "\n" + "Here are the items: "
-				+ Arrays.toString(this.items);
+				+ Arrays.toString(this.items) + "\n" 
+				+ "There are " + this.money + " Sapphires in this Location";
 	}
 
 	public String getName() {
@@ -44,11 +45,11 @@ public class Locale {
 		this.desc = value;
 	}
 	
-	public int getMoney() {
+	public double getMoney() {
 		return this.money;
 	}
 	
-	public void setMoney(int value) {
+	public void setMoney(double value) {
 		this.money = value;
 	}
 	
@@ -100,7 +101,7 @@ public class Locale {
 	public String toString() {
 		return "[Locale object: id= " + this.id + " name= " + this.name
 				+ " desc= " + this.desc + " items= "
-				+ Arrays.toString(this.items) + "] ";
+				+ Arrays.toString(this.items) + " money = " + this.money + "] ";
 	}
 
 	//
@@ -109,7 +110,7 @@ public class Locale {
 	
 	private int id;
 	private Item[] items;
-	private int money;
+	private double money;
 	private String name;
 	private String desc;
 	private Locale north;
