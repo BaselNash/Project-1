@@ -483,10 +483,19 @@ public class Game {
 
 		// if statement for the NewLocation
 
-			if (currentLocale == null) {
+			if (currentLocale.getNorth() == null) {
 				System.out.println("Invalid Move! Try Again");
-
-			} else {
+				
+			} if (currentLocale.getWest() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			} if (currentLocale.getEast() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			} if (currentLocale.getSouth() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			}else {
 				
 				moves = moves + 1;
 				points = points + 5;
