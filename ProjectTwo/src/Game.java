@@ -440,22 +440,61 @@ public class Game {
 
 		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
 			
-			currentLocale = currentLocale.getNorth();
+			if (currentLocale.getNorth() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			}else{
+				
+				currentLocale = currentLocale.getNorth();
+				moves = moves + 1;
+				points = points + 5;
+				AchievementRatio = points / moves;
+			}
 			
 		} else if (command.equalsIgnoreCase("south")
 				|| command.equalsIgnoreCase("s")) {
 			
-			currentLocale = currentLocale.getSouth();
+			if (currentLocale.getSouth() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			}else{
+			
+				currentLocale = currentLocale.getSouth();
+				moves = moves + 1;
+				points = points + 5;
+				AchievementRatio = points / moves;
+			
+			}
 			
 		} else if (command.equalsIgnoreCase("east")
 				|| command.equalsIgnoreCase("e")) {
 			
-			currentLocale = currentLocale.getEast();
+			if (currentLocale.getEast() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			}else{
+			
+				currentLocale = currentLocale.getEast();
+				moves = moves + 1;
+				points = points + 5;
+				AchievementRatio = points / moves;
+			
+			}
 			
 		} else if (command.equalsIgnoreCase("west")
 				|| command.equalsIgnoreCase("w")) {
 			
-			currentLocale = currentLocale.getWest();
+			if (currentLocale.getWest() == null) {
+				System.out.println("Invalid Move! Try Again");
+				
+			}else{
+			
+				currentLocale = currentLocale.getWest();
+				moves = moves + 1;
+				points = points + 5;
+				AchievementRatio = points / moves;
+			
+			}
 			
 		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
@@ -480,27 +519,6 @@ public class Game {
 					.println("The command that you have just placed is incorrect");
 			help();
 		}
-
-		// if statement for the NewLocation
-
-			if (currentLocale.getNorth() == null) {
-				System.out.println("Invalid Move! Try Again");
-				
-			} if (currentLocale.getWest() == null) {
-				System.out.println("Invalid Move! Try Again");
-				
-			} if (currentLocale.getEast() == null) {
-				System.out.println("Invalid Move! Try Again");
-				
-			} if (currentLocale.getSouth() == null) {
-				System.out.println("Invalid Move! Try Again");
-				
-			}else {
-				
-				moves = moves + 1;
-				points = points + 5;
-				AchievementRatio = points / moves;
-			}
 	}
 
 	public static void map() {
