@@ -8,6 +8,7 @@ public class Game {
 	public static Locale currentLocale;
 	public static String command;
 	public static String decision;
+	public static String choice;
 	public static boolean stillInTheGame = true;
 	public static Locale[] Locations;
 	public static Item[] ITEMS;
@@ -86,33 +87,7 @@ public class Game {
 		gameItem5.setName("Sharp Sword");
 		gameItem5.setDesc("A really useful thing to have, if the witch comes.");
 		
-		// instances of Money "cha ching$$$$"
 		
-		Currency enchantedSapphires0 = new Currency(0);
-		enchantedSapphires0.setValue(23);
-		
-		Currency enchantedSapphires1 = new Currency(1);
-		enchantedSapphires1.setValue(143);
-		
-		Currency enchantedSapphires2 = new Currency(2);
-		enchantedSapphires2.setValue(652);
-		
-		Currency enchantedSapphires3 = new Currency(3);
-		enchantedSapphires3.setValue(54);
-		
-		Currency enchantedSapphires4 = new Currency(4);
-		enchantedSapphires4.setValue(723);
-		
-		Currency enchantedSapphires5 = new Currency(5);
-		enchantedSapphires5.setValue(450);
-		
-		Currency enchantedSapphires6 = new Currency(6);
-		enchantedSapphires6.setValue(18);
-		
-		Currency enchantedSapphires7 = new Currency(7);
-		enchantedSapphires7.setValue(87);
-		
-
 		// Create the instance of locations
 		
 		Danger location0 = new Danger(0);
@@ -241,21 +216,6 @@ public class Game {
 		System.out.println("You are currently in" + currentLocale);
 		System.out.println();
 		System.out.println("Press any key to begin");
-
-		// 2D array for the game,
-
-		//navigationArray = new int[][] {
-
-		/* N S E W */
-		/* Location 0 */ //{ 1, -1, -1, -1 },
-		/* Location 1 */ //{ 4, 0, 3, 2 },
-		/* Location 2 */ //{ -1, -1, 1, -1 },
-		/* Location 3 */ //{ -1, -1, -1, 1 },
-		/* Location 4 */ //{ 5, 1, -1, -1 },
-		/* Location 5 */ //{ 8, 4, 7, 6 },
-		/* Location 6 */ //{ -1, -1, 5, -1 },
-		/* Location 7 */ //{ -1, -1, -1, 5 },
-		/* Location 8 */ //{ -1, 5, -1, -1 } };
 	};
 	
 	
@@ -328,17 +288,29 @@ public class Game {
             	Scanner inputReader = new Scanner(System.in);
             	decision = inputReader.nextLine();
             	System.out.println("Would you like to purchase this item? Y or N");
-            		if(decision.equalsIgnoreCase("Y") || decision.equalsIgnoreCase("yes") && playerBank > currentItem.getCost() ) {
+            		//if(decision.equalsIgnoreCase("Y") || decision.equalsIgnoreCase("yes") && playerBank > currentItem.getCost() ) {
             			
-            			PlayerInventory[playerInventorySize] = currentItem.getName();
+            			//PlayerInventory[playerInventorySize] = ;
 
-            			playerInventorySize = playerInventorySize + 1;
-            		}
+            			//playerInventorySize = playerInventorySize + 1;
+            		//}
             return  currentItem;
            
             
         } else {
             System.out.println("Could not find " + targetItem + " in " + magicItemCounter + " comparisons.");
+            System.out.println("Would you like to search again or exit?");
+            Scanner inputReader = new Scanner(System.in);
+        	choice = inputReader.nextLine();
+        		if(choice.equalsIgnoreCase("Search") || choice.equalsIgnoreCase("S")) { 
+        			
+        			ReadMagicItemsAndPromptUser();
+        			
+        		} if (choice.equalsIgnoreCase("exit") || choice.equalsIgnoreCase("E")) {
+        			
+        			currentLocale = currentLocale.getSouth();
+        			updateDisplay();
+        		}
         }
 
         return retVal;
@@ -407,7 +379,8 @@ public class Game {
 		System.out.println("   South or S");
 		System.out.println("   West or W");
 		System.out.println("   East or E");
-		System.out.println("   Help or H");
+		System.out.println("   Take Item or TI");
+		System.out.println("   Take Money or TM");
 		System.out.println("   Inventory or I");
 		System.out.println("   Map or M");
 		System.out.println("   Quit or Q");
@@ -467,22 +440,22 @@ public class Game {
 
 		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
 			
-			currentLocale.getNorth();
+			currentLocale = currentLocale.getNorth();
 			
 		} else if (command.equalsIgnoreCase("south")
 				|| command.equalsIgnoreCase("s")) {
 			
-			currentLocale.getSouth();
+			currentLocale = currentLocale.getSouth();
 			
 		} else if (command.equalsIgnoreCase("east")
 				|| command.equalsIgnoreCase("e")) {
 			
-			currentLocale.getEast();
+			currentLocale = currentLocale.getEast();
 			
 		} else if (command.equalsIgnoreCase("west")
 				|| command.equalsIgnoreCase("w")) {
 			
-			currentLocale.getWest();
+			currentLocale = currentLocale.getWest();
 			
 		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
