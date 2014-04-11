@@ -166,13 +166,13 @@ public class Game {
 		location1.setWest(location2);
 		location1.setSouth(location0);
 
-		// Broom Stick Storage
+		// Potion's room
 		location2.setEast(location1);
 
-		// Armory
+		// Broom Stick Storage
 		location3.setWest(location1);
 
-		// Dungeon
+		// Armory
 		location4.setNorth(location5);
 		location4.setSouth(location1);
 
@@ -293,10 +293,12 @@ public class Game {
 			System.out.println("Found " + targetItem + " after "
 					+ magicItemCounter + " comparisons.");
 			System.out.println("Would you like to purchase this item? Y or N");
+			
 			Scanner inputReader = new Scanner(System.in);
 			decision = inputReader.nextLine();
-			if (decision.equalsIgnoreCase("Y")
-					&& playerBank > currentItem.getCost()) {
+			if (decision.equalsIgnoreCase("Y") ) {
+				
+				if(playerBank > currentItem.getCost()) {
 
 				System.out.println(currentItem.getName()
 						+ " has been added to your encahnted bag.");
@@ -308,18 +310,19 @@ public class Game {
 				enchantedBag[enchantedBagSize] = currentItem;
 
 				enchantedBagSize = enchantedBagSize + 1;
-
-			} else if (decision.equalsIgnoreCase("Y")
-					&& playerBank < currentItem.getCost()) {
-
-				System.out.println("you can't afford it. ");
-				System.out.println(" Press enter to see other Magic Items.");
+				
+				} else {
+					
+					System.out.println("you can't afford it. ");
+					System.out.println(" Press enter to see other Magic Items.");
+				}
 
 			} else {
 
 				ReadMagicItemsAndPromptUser();
 
 			}
+			
 			return currentItem;
 
 		} else {
