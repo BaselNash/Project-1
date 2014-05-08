@@ -18,7 +18,8 @@ public class Locale {
 
 		return this.name + "\n" + this.desc + "\n" + "Here are the items: "
 				+ Arrays.toString(this.items) + "\n" 
-				+ "There are " + this.money + " Sapphires in this Location";
+				+ "There are " + this.money + " Sapphires in this Location."
+				+ "\n" + "!!CAUTION!! There is a " + this.monster;
 	}
 
 	public String getName() {
@@ -53,7 +54,15 @@ public class Locale {
 		this.money = value;
 	}
 	
-	// ---------------------------------------------
+	public Monster getMonster() {
+		return this.monster;
+	}
+	
+	public void setMonster(Monster value) {
+		this.monster = value;
+	}
+	
+	// --------------------------------------------- Methods to assign
 	
 	public Locale getNorth() {
 		return this.north;
@@ -96,12 +105,39 @@ public class Locale {
 		this.south = south;
 	}
 	
+	
+	// New addition to the map
+	
+	
+	public Locale getDown() {
+		return this.down;
+		
+	}
+	
+	public void setDown(Locale down) {
+		
+		this.down = down;
+	}
+	
+	public Locale getUp() {
+		return this.up;
+		
+	}
+	
+	public void setUp(Locale up) {
+		
+		this.up = up;
+	}
+	
+	
+	
+	
 
 	// Other methods
 	public String toString() {
 		return "[Locale object: id= " + this.id + " name= " + this.name
 				+ " desc= " + this.desc + " items= "
-				+ Arrays.toString(this.items) + " money = " + this.money + "] ";
+				+ Arrays.toString(this.items) + " money= " + this.money + " monsters= " + this.monster + "] ";
 	}
 
 	//
@@ -113,9 +149,11 @@ public class Locale {
 	private double money;
 	private String name;
 	private String desc;
+	private Monster monster;
 	private Locale north;
 	private Locale south;
 	private Locale west;
 	private Locale east;
-	
+	private Locale down;
+	private Locale up;
 }
