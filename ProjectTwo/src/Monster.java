@@ -37,8 +37,9 @@ public class Monster {
 		this.health =  this.health - damage; 
 	}	
 	
-	
-
+	public void dead(){
+		this.health = 0;
+	}
 	//Private 
 	
 	private String name;
