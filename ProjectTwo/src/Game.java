@@ -98,23 +98,6 @@ public class Game {
 		System.out.println("You do not have any health potions");
 	}
 
-	public static void attack(){
-		Monster monster = currentLocale.getMonster();
-		if(monster.getHealth() > 0){
-		playerHealth = playerHealth - 25;
-		System.out.println();
-		System.out.println("Aghh you have been injured " + 25 + " points your health is now " + playerHealth);
-		System.out.println();
-		monster.attack(30);
-		System.out.println("You have Damaged the " + monster.getName() + "by " + 40 + " it's health is now " + monster.getHealth());
-		System.out.println();
-		}else{
-			monster.attack(0);
-			monster.dead();
-			System.out.println(monster.getName() + "Is Dead with health of " + monster.getHealth());
-		}
-	}
-	
 	public static void intialStart() {
 
 		// Intializing the intial commands
@@ -356,6 +339,23 @@ public class Game {
 		}
 		
 	};
+	
+	public static void attack(){
+		Monster monster = currentLocale.getMonster();
+		if(monster.getHealth() > 0){
+		playerHealth = playerHealth - 25;
+		System.out.println();
+		System.out.println("Aghh you have been injured " + 25 + " points your health is now " + playerHealth);
+		System.out.println();
+		monster.attack(30);
+		System.out.println("You have Damaged the " + monster.getName() + "by " + 40 + " it's health is now " + monster.getHealth());
+		System.out.println();
+		}else{
+			monster.attack(0);
+			monster.dead();
+			System.out.println(monster.getName() + "Is Dead with health of " + monster.getHealth());
+		}
+	}
 
 	public static void SearchOrPurchase() {
 		

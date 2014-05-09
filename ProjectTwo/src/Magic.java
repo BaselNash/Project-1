@@ -73,14 +73,12 @@ public class Magic {
         	if(decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")){
         		
         		System.out.println("You have successfully left the premises");
-        		
-        		
         		newLocale = currentLocale.getSouth();
         	}
 		
 	}
 	
-	private static ListItem binarySearchArray(ListItem[] items, String targetItem){
+	private ListItem binarySearchArray(ListItem[] items, String targetItem){
 		
 		ListItem retVal = null;
 		System.out.println("Binary Search for " + targetItem + ".");
@@ -118,139 +116,51 @@ public class Magic {
     		
     		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
     			
-    			System.out.println("Testing for Purchase");
     			
-    				if(playerBank > currentItem.getCost()){
-    					
-    					System.out.println("You can Purchase this item");
-    					
-    					System.out.println(currentItem.getName()
-    							+ " has been added to your encahnted bag.");
-
-    					playerBank = playerBank - currentItem.getCost();
-
-    					System.out.println(" Press enter to see other Magic Items.");
-
-    					enchantedBag[enchantedBagSize] = currentItem;
-
-    					enchantedBagSize = enchantedBagSize + 1;
-    					
-    				}else{
-    					
-    					System.out.println("You cannot Purchase this item");
-    				}
     			
     		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
     				
     			 searchOrExit();
     			
-    		} else {
-    			
-    			System.out.println("Invalid type, try again.");
-    			
-    		}
+    		} 
             
         } else {
         	
             System.out.println("Could not find " + targetItem + " in " + counter + " comparisons.");
             
-            System.out.println("Would you like to search or Exit? ");
-			
-            Scanner reader = new Scanner(System.in);
-            decision = reader.nextLine();
-            
-            	if(decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")){
-            		
-            		System.out.println("You have successfully left the premises");
-            		currentLocale = currentLocale.getSouth();
-            		System.out.println(currentLocale.getInfo());
-            		
-            	} 
+            	searchOrExit();
             
             }
         return retVal;
 	}	
+	
+	public void purchase(){
+		
+		System.out.println("Testing for Purchase");
+		
+		if(playerBank > retVal.getCost()){
+			
+			System.out.println("You can Purchase this item");
+			
+			System.out.println(retVal.getName() + " has been added to your encahnted bag.");
 
-	/*private static ListItem LinearSearch(ListMan lm, String targetItem) {
+			playerBank = playerBank - retVal.getCost();
 
-		ListItem retVal = null;
-		System.out.println("Searching for " + targetItem + ".");
-		int magicItemCounter = 0; // Counts the number of searches through each
-									// item.
-		ListItem currentItem = new ListItem();
-		currentItem = lm.getHead();
-		boolean isFound = false;
-		while ((!isFound) && (currentItem != null)) {
-			magicItemCounter = magicItemCounter + 1;
-			if (currentItem.getName().equalsIgnoreCase(targetItem)) {
-				// We found it!
-				isFound = true;
-				retVal = currentItem;
-			} else {
-				// Keep looking.
-				currentItem = currentItem.getNext();
-			}
+			System.out.println(" Press enter to see other Magic Items.");
+
+			enchantedBag[enchantedBagSize] = retVal;
+
+			enchantedBagSize = enchantedBagSize + 1;
+			
+		}else{
+			
+			System.out.println("You cannot Purchase this item");
 		}
-		if (isFound) {
-			System.out.println("Found " + targetItem + " after "
-					+ magicItemCounter + " comparisons.");
-			System.out.println("Would you like to purchase this item? Y or N");
-			Scanner inputReader = new Scanner(System.in);
-			decision = inputReader.nextLine();
-			if (decision.equalsIgnoreCase("Y")
-					&& playerBank > currentItem.getCost()) {
+	}
 
-				System.out.println(currentItem.getName()
-						+ " has been added to your encahnted bag.");
-
-				playerBank = playerBank - currentItem.getCost();
-
-				System.out.println(" Press enter to see other Magic Items.");
-
-				enchantedBag[enchantedBagSize] = currentItem;
-
-				enchantedBagSize = enchantedBagSize + 1;
-
-			} else if (decision.equalsIgnoreCase("Y")
-					&& playerBank < currentItem.getCost()) {
-
-				System.out.println("you can't afford it. ");
-				System.out.println(" Press enter to see other Magic Items.");
-
-			} else {
-
-				ReadMagicItemsAndPromptUser();
-
-			}
-			return currentItem;
-
-		} else {
-			System.out.println("Could not find " + targetItem + " in "
-					+ magicItemCounter + " comparisons.");
-			System.out.println("Would you like to search again or exit?");
-			Scanner inputReader = new Scanner(System.in);
-			choice = inputReader.nextLine();
-			if (choice.equalsIgnoreCase("Search")
-					|| choice.equalsIgnoreCase("S")) {
-
-				ReadMagicItemsAndPromptUser();
-
-			}
-			if (choice.equalsIgnoreCase("exit") || choice.equalsIgnoreCase("E")) {
-
-				System.out.println();
-				currentLocale = currentLocale.getSouth();
-				updateDisplay();
-			} else {
-
-				System.out.println("Invalid Command.");
-				System.out.println("Would you like to search again or exit?");
-			}
-		}
-
-		return retVal;
-	}*/
-
+	
+	
+	
 	// Second method is to read the magic items from the file to the list.
 
 	private static void readmagicItemsFromFileToList(String fileName, ListMan lm) {
