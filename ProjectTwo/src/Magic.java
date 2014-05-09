@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+//private 
+
+private ListItem[] items; 
+
 public class Magic {
 
 	
@@ -18,8 +22,10 @@ public class Magic {
 		readmagicItemsFromFileToList(fileName, listMan1);
 
 		// Managing the array for to hold the items. The array is called items
+		
+		items = new ListItem[listMan1.getLength()];
 
-		ListItem[] items = new ListItem[listMan1.getLength()]; // .getLength
+		 // .getLength
 																// method can be
 																// found in
 																// listMan.
