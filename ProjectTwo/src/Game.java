@@ -493,13 +493,37 @@ public class Game {
 		System.out.println(currentLocale.getInfo());
 
 		if (currentLocale.getId() == 8) {
-			Magic readMagic = new Magic();
-			readMagic.readMagicItem();
+			Magic magic = new Magic();
+			magic.readMagicItem();
 			// promptUser();
 		}
 
 	}
 
+	public void PromptUser(){
+		selectionSort(items);
+		
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                System.out.println(items[i].toString());
+            }
+        }
+		
+		// Prompt the user, to select an item.
+
+		Scanner inputReader = new Scanner(System.in);
+		System.out.print("What item would you like? ");
+		String targetItem = new String();
+		targetItem = inputReader.nextLine();
+		System.out.println();
+
+		ListItem li = new ListItem();
+		li = binarySearchArray(items, targetItem);
+		if (li != null) {
+			System.out.println(li.toString());
+		}
+	}
+	
 	private static void typeNavigation() {
 
 		// The Intial position > 0 which starts the position

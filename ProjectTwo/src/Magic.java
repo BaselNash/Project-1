@@ -31,30 +31,6 @@ public class Magic {
 		// loop
 		
 	}
-	
-	public void PromptUser(){
-		selectionSort(items);
-		
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                System.out.println(items[i].toString());
-            }
-        }
-		
-		// Prompt the user, to select an item.
-
-		Scanner inputReader = new Scanner(System.in);
-		System.out.print("What item would you like? ");
-		String targetItem = new String();
-		targetItem = inputReader.nextLine();
-		System.out.println();
-
-		ListItem li = new ListItem();
-		li = binarySearchArray(items, targetItem);
-		if (li != null) {
-			System.out.println(li.toString());
-		}
-	}
 
 	// Magic Item methods
 
