@@ -38,9 +38,8 @@ public class Magic {
 	
 	private ListItem binarySearchArray(ListItem[] items, String targetItem){
 		
-		ListItem retVal = null;
 		System.out.println("Binary Search for " + targetItem + ".");
-		ListItem currentItem = new ListItem();
+		ListItem currentItem = null;
 		boolean isFound = false;
 		int counter = 0;
 		int low = 0;
@@ -51,7 +50,7 @@ public class Magic {
             if (currentItem.getName().equalsIgnoreCase(targetItem)) {
                 // We found it!
                 isFound = true;
-                retVal = currentItem;
+                return currentItem;
             } else {
                 // Keep looking.
                 counter++;
@@ -72,7 +71,7 @@ public class Magic {
             System.out.println("Could not find " + targetItem + " in " + counter + " comparisons.");
             
             }
-        return retVal;
+        return currentItem;
 	}	
 
 	
