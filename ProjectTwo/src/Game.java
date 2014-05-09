@@ -517,10 +517,9 @@ public class Game {
 		targetItem = inputReader.nextLine();
 		System.out.println();
 
-		ListItem li = new ListItem();
-		li = binarySearchArray(items, targetItem);
-		if (li != null) {
-			System.out.println(li.toString());
+		ListItem item = binarySearchArray();
+		if (item != null) {
+			System.out.println(item.toString());
 		}
 	}
 	
