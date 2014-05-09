@@ -25,6 +25,8 @@ public class Game {
 	public static int playerHealth = 125;
 	public static Item healthPotion;
 	public static int attackPower = 15;
+	public static Stack myStack = new Stack();
+	public static Queue myQueue = new Queue();
 	
 
 	public static void main(String[] args) {
@@ -78,7 +80,41 @@ public class Game {
 		}
 		System.out.println("You do not have any health potions");
 	}
+	
+	public static void IfCheatMessage(){
+		
+		for (int i = 0; i < playerInventory.length; i++) {
+			Item playerInventoryVariable = playerInventory[i];
+			if (playerInventoryVariable != null) {
+				if (playerInventory[i].getId() == 5){
+					System.out.println("You cannot defeat the Witch with low health, you need health potions." +
+					"\n"+"Go to the potion Room, there is a container full of health potions. Each potion gives a 125 boost.");
+					System.out.println();
+				}if (playerInventory[i].getId() == 6){
+					
+				}return;
+			} 
+		}
+		System.out.println("You do not have any health potions");
+	}
 
+	public static void attack(){
+		Monster monster = currentLocale.getMonster();
+		if(monster.getHealth() > 0){
+		playerHealth = playerHealth - 25;
+		System.out.println();
+		System.out.println("Aghh you have been injured " + 25 + " points your health is now " + playerHealth);
+		System.out.println();
+		monster.attack(30);
+		System.out.println("You have Damaged the " + monster.getName() + "by " + 40 + " it's health is now " + monster.getHealth());
+		System.out.println();
+		}else{
+			monster.attack(0);
+			monster.dead();
+			System.out.println(monster.getName() + "Is Dead with health of " + monster.getHealth());
+		}
+	}
+	
 	public static void intialStart() {
 
 		// Intializing the intial commands
@@ -108,6 +144,14 @@ public class Game {
 		gameItem5.setName("Sharp Sword");
 		gameItem5.setDesc("A really useful thing to have, if the witch comes.");
 		
+		Item gameItem6 = new Item(5);
+		gameItem6.setName("Cheat message 1");
+		gameItem6.setDesc("Important to get through the game!!.");
+		
+		Item gameItem7 = new Item(6);
+		gameItem7.setName("Cheat message 2");
+		gameItem7.setDesc("Important to get through the game!!.");
+		
 		// Create the instance of monsters
 		
 		Monster ghoul = new Monster(50);
@@ -136,7 +180,7 @@ public class Game {
 		Danger location1 = new Danger(1);
 		location1.setName("Hall of Keys");
 		location1.setDesc("There are keys hovering all around you.");
-		location1.setItems(new Item[] {});
+		location1.setItems(new Item[] {gameItem6});
 		location1.setDangerLevel("25%");
 		location1.setMoney(143);
 
@@ -172,7 +216,7 @@ public class Game {
 		Danger location6 = new Danger(6);
 		location6.setName("Kitchen");
 		location6.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
-		location6.setItems(new Item[] {});
+		location6.setItems(new Item[] { gameItem7});
 		location6.setDangerLevel("0.2%");
 		location6.setMoney(18);
 
@@ -260,6 +304,21 @@ public class Game {
 		location11.setNorth(location10);
 		
 		currentLocale = location0;
+		
+		try{
+			myStack.push(currentLocale);
+		} catch (Exception ex){
+			System.out.println("Stack is full");
+		}
+		
+		try{
+			myQueue.enqueue(currentLocale);
+			} catch (Exception ex){
+				System.out.println("Queue is full");
+			}
+		
+		
+		
 
 		// set up the location array.
 
@@ -288,24 +347,15 @@ public class Game {
 		System.out.println();
 		System.out.println("Press any key to begin");
 		
-	};
-	
-	public static void attack(){
-		Monster monster = currentLocale.getMonster();
-		if(monster.getHealth() > 0){
-		playerHealth = playerHealth - 25;
-		System.out.println();
-		System.out.println("Aghh you have been injured " + 25 + " points your health is now " + playerHealth);
-		System.out.println();
-		monster.attack(30);
-		System.out.println("You have Damaged the " + monster.getName() + "by " + 40 + " it's health is now " + monster.getHealth());
-		System.out.println();
-		}else{
-			monster.attack(0);
-			monster.dead();
-			System.out.println(monster.getName() + "Is Dead with health of " + monster.getHealth());
+		Monster newMonster = currentLocale.getMonster();
+		
+		if(newMonster != null){
+			if(witch.getHealth() < 0){
+				quit();
+			}
 		}
-	}
+		
+	};
 
 	public static void SearchOrPurchase() {
 		
@@ -389,7 +439,7 @@ public class Game {
 		Magic readMagic = new Magic();
 		readMagic.readMagicItem();
 			//promptUser(); 
-		} 
+		}
 
 	}
 
@@ -443,6 +493,9 @@ public class Game {
 		} else if (command.equalsIgnoreCase("Map")
 				|| command.equalsIgnoreCase("m")) {
 			IfMap();
+		} else if (command.equalsIgnoreCase("Cheat")
+				|| command.equalsIgnoreCase("Ch")) {
+			IfCheatMessage();
 		} else if (command.equalsIgnoreCase("Potion")
 				|| command.equalsIgnoreCase("P")) {
 			IfPotion();
@@ -479,9 +532,24 @@ public class Game {
 		} else {
 
 			currentLocale = newLocale;
+			
+			try{
+				myStack.push(currentLocale);
+			} catch (Exception ex){
+				System.out.println("Stack is full");
+			}
+			
+			try{
+			myQueue.enqueue(currentLocale);
+			} catch (Exception ex){
+				System.out.println("Queue is full");
+			}
+			
 			moves = moves + 1;
 			points = points + 5;
 			AchievementRatio = points / moves;
+			
+			
 
 		}
 		
@@ -578,9 +646,46 @@ public class Game {
 
 	}
 	
+	
+	
 	private static void quit() {
-
-		stillInTheGame = false;
+		
+		System.out.println("Do you want to print it Backward Or Forward? ");
+		Scanner inputReader = new Scanner(System.in);
+		String LastChoice = inputReader.nextLine();
+		
+		System.out.println("Locations you have Visited:-");
+		
+		if (LastChoice.equalsIgnoreCase("Backward")){
+			Locale hasVisited = null;
+			try{
+			hasVisited = myStack.pop();
+			
+			while(hasVisited != null){
+				System.out.println(hasVisited.getName());
+				System.out.println();
+				hasVisited = myStack.pop();
+				
+			}
+			} catch(Exception ex){
+				
+			}
+		}if (LastChoice.equalsIgnoreCase("Forward")){
+			Locale hasVisited = null;
+			try{
+			hasVisited = myQueue.dequeue();
+			
+			while(hasVisited != null){
+				
+				System.out.println(hasVisited.getName());
+				System.out.println();
+				hasVisited = myQueue.dequeue();
+			}
+			} catch (Exception ex){
+				
+				
+			}
+		}stillInTheGame = false;
 
 	}
 };

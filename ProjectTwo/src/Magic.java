@@ -74,6 +74,7 @@ public class Magic {
         		
         		System.out.println("You have successfully left the premises");
         		
+        		
         		newLocale = currentLocale.getSouth();
         	}
 		
