@@ -2,13 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-//private 
-
-private ListItem[] items; 
-
 public class Magic {
-
 	
+	//private 
+
+	private ListItem[] items; 
+
 	public void readMagicItem(){
 
 		// creating the list manager, classified as listMan1
