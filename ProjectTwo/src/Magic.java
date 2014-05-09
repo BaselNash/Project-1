@@ -96,7 +96,7 @@ public class Magic {
 					+ counter + " comparisons.");
 
 		}
-		return currentItem;
+		return null;
 	}
 
 	// Second method is to read the magic items from the file to the list.
