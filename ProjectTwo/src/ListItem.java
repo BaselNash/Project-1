@@ -2,10 +2,10 @@ public class ListItem {
 
 	// Public
 
-	public ListItem(){
-		
+	public ListItem() {
+
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -29,21 +29,22 @@ public class ListItem {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+
 	public ListItem getNext() {
-	    return next;
+		return next;
 	}
+
 	public void setNext(ListItem next) {
-	    this.next = next;
+		this.next = next;
 	}
-	
+
 	// Methods
-	
+
 	@Override
-    public String toString() {
-        return "[ListItem name=" + this.name
-                + " desc=" + this.desc
-                + " cost= " + this.cost + "]";
-    }
+	public String toString() {
+		return "[ListItem name=" + this.name + " desc=" + this.desc + " cost= "
+				+ this.cost + "]";
+	}
 
 	// Private
 

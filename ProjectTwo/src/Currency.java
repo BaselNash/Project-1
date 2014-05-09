@@ -1,7 +1,7 @@
 public class Currency {
 
 	// Public
-	
+
 	public static String currencyName = " enchantedSapphires";
 
 	public Currency(int id) {
@@ -21,15 +21,13 @@ public class Currency {
 	public void setValue(int value) {
 		this.value = value;
 	}
-	
-	//methods
-	
+
+	// methods
+
 	public String toString() {
-        return  "There are " + 
-        		this.value +
-        		currencyName;	
-        
-    }
+		return "There are " + this.value + currencyName;
+
+	}
 
 	// Private
 

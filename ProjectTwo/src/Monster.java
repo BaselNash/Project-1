@@ -1,9 +1,9 @@
 public class Monster {
 
-	public Monster(int health) {	
+	public Monster(int health) {
 		this.health = health;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -11,11 +11,11 @@ public class Monster {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}
-	
+
 	public String getDesc() {
 		return desc;
 	}
@@ -23,28 +23,27 @@ public class Monster {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
-	//Methods
-	
+
+	// Methods
+
 	@Override
-    public String toString() {
-        return "[Monster name= " + this.name
-                + " health= " + this.health
-                + " Desc= " + this.desc + "]";
-    }
-	
+	public String toString() {
+		return "[Monster name= " + this.name + " health= " + this.health
+				+ " Desc= " + this.desc + "]";
+	}
+
 	public void attack(int damage) {
-		this.health =  this.health - damage; 
-	}	
-	
-	public void dead(){
+		this.health = this.health - damage;
+	}
+
+	public void dead() {
 		this.health = 0;
 	}
-	//Private 
-	
+
+	// Private
+
 	private String name;
 	private int health;
 	private String desc;
-	
-}
 
+}
