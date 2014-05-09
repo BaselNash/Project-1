@@ -19,7 +19,7 @@ public class Locale {
 		return this.name + "\n" + this.desc + "\n" + "Here are the items: "
 				+ Arrays.toString(this.items) + "\n" 
 				+ "There are " + this.money + " Sapphires in this Location."
-				+ "\n" + "!!CAUTION!! There is a " + this.monster;
+				+ "\n" + "Monster: " + this.monster;
 	}
 
 	public String getName() {

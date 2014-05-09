@@ -27,7 +27,7 @@ public class Game {
 	public static int attackPower = 15;
 	public static Stack myStack = new Stack();
 	public static Queue myQueue = new Queue();
-	
+	public static int damage = 0;
 
 	public static void main(String[] args) {
 		intialStart();
@@ -58,44 +58,62 @@ public class Game {
 				if (playerInventory[i].getId() == 0) {
 					// playerInventoryVariable = true;
 					map();
-					
-				}return;
+
+				}
 			}
 		}
 		System.out.println("You do not have the map");
 	}
-	
+
 	public static void IfPotion() {
-		
+
 		for (int i = 0; i < playerInventory.length; i++) {
 			Item playerInventoryVariable = playerInventory[i];
 			if (playerInventoryVariable != null) {
-				if (playerInventory[i].getId() == 2){
-					//playerInventoryVariable = true;
+				if (playerInventory[i].getId() == 2) {
+					// playerInventoryVariable = true;
 					playerHealth = playerHealth + 125;
-					System.out.println("Your current health is now: " + playerHealth);
+					System.out.println("Your current health is now: "
+							+ playerHealth);
 					System.out.println();
-				}return;
-			} 
+				}
+			}
 		}
 		System.out.println("You do not have any health potions");
 	}
-	
-	public static void IfCheatMessage(){
-		
+
+	public static void IfCheatMessage() {
+
 		for (int i = 0; i < playerInventory.length; i++) {
 			Item playerInventoryVariable = playerInventory[i];
 			if (playerInventoryVariable != null) {
-				if (playerInventory[i].getId() == 5){
-					System.out.println("You cannot defeat the Witch with low health, you need health potions." +
-					"\n"+"Go to the potion Room, there is a container full of health potions. Each potion gives a 125 boost.");
+				if (playerInventory[i].getId() == 5) {
+					System.out
+							.println("                      How to Become Immortal");
+					System.out
+							.println("You cannot defeat the Witch with low health, you need health potions."
+									+ "\n"
+									+ "Go to the potion Room, and steal the container full of health potions. Each potion gives a 125 boost."
+									+ "\n" + "Press P to Drink the potion.");
 					System.out.println();
-				}if (playerInventory[i].getId() == 6){
-					
-				}return;
-			} 
+					System.out
+							.println("                      Secrets of attacking Monsters");
+					System.out
+							.println("You cannot attack anything unless you have a weapon, there is a sharp sword in the armory"
+									+ "\n"
+									+ "Aquire it so you may kill some monsters. The sword's power will increase with each strike by 10 points"
+									+ "\n"
+									+ "Hint1: If you kill the ghoul in the dungeon, your strength damage will increase by 25 points"
+									+ "\n"
+									+ "Hint2: If you kill the giant cat in the cellar below the dungeon your strength damage will increase by 75"
+									+ "\n"
+									+ "Hint3: Kill The witch to win the Game"
+									+ "\n" + "Good Luck on your mission!");
+					System.out.println();
+				}
+			}
 		}
-		System.out.println("You do not have any health potions");
+		System.out.println("You do not have the cheat sheet.");
 	}
 
 	public static void intialStart() {
@@ -126,29 +144,28 @@ public class Game {
 		Item gameItem5 = new Item(4);
 		gameItem5.setName("Sharp Sword");
 		gameItem5.setDesc("A really useful thing to have, if the witch comes.");
-		
+
 		Item gameItem6 = new Item(5);
 		gameItem6.setName("Cheat message 1");
 		gameItem6.setDesc("Important to get through the game!!.");
-		
+
 		Item gameItem7 = new Item(6);
 		gameItem7.setName("Cheat message 2");
 		gameItem7.setDesc("Important to get through the game!!.");
-		
+
 		// Create the instance of monsters
-		
-		Monster ghoul = new Monster(50);
-		ghoul.setName("Mr. Ghoul ");
+
+		Monster ghoul = new Monster(100);
+		ghoul.setName("Mr. Ghoul");
 		ghoul.setDesc("Scary Ghoul, attack at will. ");
-		
-		Monster giantCat = new Monster(100);
-		giantCat.setName("Taco Cat");
+
+		Monster giantCat = new Monster(510);
+		giantCat.setName("Giant Cat");
 		giantCat.setDesc("It's a giant cat that is about to maul you to death");
-		
-		Monster witch = new Monster(280);
+
+		Monster witch = new Monster(1230);
 		witch.setName("Evil Witch");
 		witch.setDesc("Defeat the witch, and win the game.");
-		
 
 		// Create the instance of locations
 
@@ -158,18 +175,18 @@ public class Game {
 		location0.setItems(new Item[] { gameItem1 });
 		location0.setDangerLevel("10%");
 		location0.setMoney(23);
-		
 
 		Danger location1 = new Danger(1);
 		location1.setName("Hall of Keys");
 		location1.setDesc("There are keys hovering all around you.");
-		location1.setItems(new Item[] {gameItem6});
+		location1.setItems(new Item[] { gameItem6 });
 		location1.setDangerLevel("25%");
 		location1.setMoney(143);
 
 		Danger location2 = new Danger(2);
 		location2.setName("Potions Room");
-		location2.setDesc("There are racks of potions, some might turn you into a frog.");
+		location2
+				.setDesc("There are racks of potions, some might turn you into a frog.");
 		location2.setItems(new Item[] { gameItem3 });
 		location2.setDangerLevel("80%");
 		location2.setMoney(652);
@@ -183,14 +200,16 @@ public class Game {
 
 		Danger location4 = new Danger(4);
 		location4.setName("Armory");
-		location4.setDesc("So much weaponry, this place is scary under the wrong hands.");
+		location4
+				.setDesc("So much weaponry, this place is scary under the wrong hands.");
 		location4.setItems(new Item[] { gameItem5 });
 		location4.setDangerLevel("75%");
 		location4.setMoney(723);
 
 		Danger location5 = new Danger(5);
 		location5.setName("Dungeon");
-		location5.setDesc("A dungeon to keep all the animals and trespassers, so do not get caught. There's a trap door leading to the abyss.");
+		location5
+				.setDesc("A dungeon to keep all the animals and trespassers, so do not get caught. There's a trap door leading to the abyss.");
 		location5.setItems(new Item[] {});
 		location5.setDangerLevel("95%");
 		location5.setMoney(450);
@@ -198,14 +217,16 @@ public class Game {
 
 		Danger location6 = new Danger(6);
 		location6.setName("Kitchen");
-		location6.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
-		location6.setItems(new Item[] { gameItem7});
+		location6
+				.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
+		location6.setItems(new Item[] { gameItem7 });
 		location6.setDangerLevel("0.2%");
 		location6.setMoney(18);
 
 		Danger location7 = new Danger(7);
 		location7.setName("Cursed Items Room");
-		location7.setDesc("A room filled with strange objects, some of them smell funny.");
+		location7
+				.setDesc("A room filled with strange objects, some of them smell funny.");
 		location7.setItems(new Item[] { gameItem4 });
 		location7.setDangerLevel("90%");
 		location7.setMoney(87);
@@ -216,25 +237,27 @@ public class Game {
 		location8.setItems(new Item[] {});
 		location8.setDangerLevel("0.1%");
 		location8.setMoney(200);
-		
+
 		Danger location9 = new Danger(9);
 		location9.setName("Cellar");
 		location9.setDesc("Entrance towards the Danger.");
 		location9.setItems(new Item[] {});
 		location9.setDangerLevel("60%");
 		location9.setMoney(300);
-		
+
 		Danger location10 = new Danger(10);
 		location10.setName("Cat Room");
-		location10.setDesc("Room full of Cats, one cat is particularly evil, and you must destroy it.");
+		location10
+				.setDesc("Room full of Cats, one cat is particularly evil, and you must destroy it.");
 		location10.setItems(new Item[] {});
 		location10.setDangerLevel("98%");
 		location10.setMoney(900);
 		location10.setMonster(giantCat);
-		
+
 		Danger location11 = new Danger(11);
 		location11.setName("Witch's Bedroom");
-		location11.setDesc("The most dangerous room of all, prepare to battle the witch.");
+		location11
+				.setDesc("The most dangerous room of all, prepare to battle the witch.");
 		location11.setItems(new Item[] {});
 		location11.setDangerLevel("100%");
 		location11.setMoney(5000);
@@ -251,10 +274,10 @@ public class Game {
 		location1.setWest(location2);
 		location1.setSouth(location0);
 
-		// Potion's Room 
+		// Potion's Room
 		location2.setEast(location1);
 
-		// Broom Stick Storage 
+		// Broom Stick Storage
 		location3.setWest(location1);
 
 		// Armory
@@ -274,34 +297,31 @@ public class Game {
 		// Cursed Items Room
 		location7.setWest(location5);
 
-		//Magic Shop
+		// Magic Shop
 		location8.setSouth(location5);
 
-		//Cellar
+		// Cellar
 		location9.setSouth(location10);
 		location9.setUp(location5);
-		
+
 		location10.setSouth(location11);
 		location10.setNorth(location9);
-		
+
 		location11.setNorth(location10);
-		
+
 		currentLocale = location0;
-		
-		try{
+
+		try {
 			myStack.push(currentLocale);
-		} catch (Exception ex){
+		} catch (Exception ex) {
 			System.out.println("Stack is full");
 		}
-		
-		try{
+
+		try {
 			myQueue.enqueue(currentLocale);
-			} catch (Exception ex){
-				System.out.println("Queue is full");
-			}
-		
-		
-		
+		} catch (Exception ex) {
+			System.out.println("Queue is full");
+		}
 
 		// set up the location array.
 
@@ -329,45 +349,80 @@ public class Game {
 		System.out.println("You are currently in" + currentLocale);
 		System.out.println();
 		System.out.println("Press any key to begin");
-		
-		Monster newMonster = currentLocale.getMonster();
-		
-		if(newMonster != null){
-			if(witch.getHealth() < 0){
-				quit();
+
+	};
+
+	public static void attack() {
+
+		for (int i = 0; i < playerInventory.length; i++) {
+			Item playerInventoryVariable = playerInventory[i];
+			if (playerInventoryVariable != null) {
+				if (playerInventory[i].getId() == 4) {
+					damage = damage + 10;
+				}
 			}
 		}
-		
-	};
-	
-	public static void attack(){
-		Monster monster = currentLocale.getMonster();
-		if(monster.getHealth() > 0){
-		playerHealth = playerHealth - 25;
-		System.out.println();
-		System.out.println("Aghh you have been injured " + 25 + " points your health is now " + playerHealth);
-		System.out.println();
-		monster.attack(30);
-		System.out.println("You have Damaged the " + monster.getName() + "by " + 40 + " it's health is now " + monster.getHealth());
-		System.out.println();
-		}else{
-			monster.attack(0);
-			monster.dead();
-			System.out.println(monster.getName() + "Is Dead with health of " + monster.getHealth());
-		}
-	}
 
-	public static void SearchOrPurchase() {
-		
-		System.out.println("");
-		System.out.println("Would you like to purchase this Item? (Y/N)");
-		System.out.println("");
-		if (command.equalsIgnoreCase("yes") || command.equalsIgnoreCase("y")){
-			System.out.println("Too Bad!");
+		// write the code for attacking.
+
+		Monster monster = currentLocale.getMonster();
+
+		if (monster != null) {
+			if (monster.getHealth() > 0) {
+				playerHealth = playerHealth - 25;
+				System.out.println();
+				System.out.println("Aghh you have been injured " + 25
+						+ " points your health is now " + playerHealth);
+				System.out.println();
+				monster.attack(damage);
+				System.out.println("You have Damaged the " + monster.getName()
+						+ "by " + damage + " it's health is now "
+						+ monster.getHealth());
+				System.out.println();
+			} else {
+				monster.attack(0);
+				monster.dead();
+				System.out.println(monster.getName()
+						+ "Is Dead with health of " + monster.getHealth());
+
+				if (monster.getName() == "Evil Witch") {
+					if (monster.getHealth() < 1) {
+						System.out
+								.println("Congratulations You have won the Game!!");
+						System.out.println();
+						quit();
+					}
+				}
+
+				if (monster.getName() == "Giant Cat") {
+					if (monster.getHealth() < 1) {
+						damage = damage + 200;
+						System.out
+								.println("Your strength damage has been increased to 75");
+					}
+				}
+
+				if (monster.getName() == "Mr. Ghoul") {
+					if (monster.getHealth() < 1) {
+						damage = damage + 100;
+						System.out
+								.println("Your strength damage has been increased to 25");
+					}
+				}
+			}
 		} else {
-			System.out.println("Ya that's right!");
+			System.out.println("The are no monsters present in the area.");
+			System.out.println();
 		}
-		
+
+		// Write conditions for wining, increasing damage and so.
+
+		if (playerHealth < 0) {
+			System.out.println("The " + monster.getName()
+					+ " has killed you, You have lost the game");
+			System.out.println();
+			quit();
+		}
 	}
 
 	private static void help() {
@@ -436,9 +491,9 @@ public class Game {
 		System.out.println(currentLocale.getInfo());
 
 		if (currentLocale.getId() == 8) {
-		Magic readMagic = new Magic();
-		readMagic.readMagicItem();
-			//promptUser(); 
+			Magic readMagic = new Magic();
+			readMagic.readMagicItem();
+			// promptUser();
 		}
 
 	}
@@ -480,14 +535,17 @@ public class Game {
 
 			newLocale = currentLocale.getDown();
 
-		}else if (command.equalsIgnoreCase("help")
+		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
 			help();
-		}else if (command.equalsIgnoreCase("Display Health")
+		} else if (command.equalsIgnoreCase("read")
+				|| command.equalsIgnoreCase("r")) {
+			IfCheatMessage();
+		} else if (command.equalsIgnoreCase("Display Health")
 				|| command.equalsIgnoreCase("DH")) {
 			System.out.println("Your current health is" + playerHealth);
 			System.out.println();
-		}else if (command.equalsIgnoreCase("attack")
+		} else if (command.equalsIgnoreCase("attack")
 				|| command.equalsIgnoreCase("a")) {
 			attack();
 		} else if (command.equalsIgnoreCase("Map")
@@ -499,7 +557,7 @@ public class Game {
 		} else if (command.equalsIgnoreCase("Potion")
 				|| command.equalsIgnoreCase("P")) {
 			IfPotion();
-		}else if (command.equalsIgnoreCase("inventory")
+		} else if (command.equalsIgnoreCase("inventory")
 				|| command.equalsIgnoreCase("i")) {
 			playerInventory();
 		} else if (command.equalsIgnoreCase("enchanted Bag")
@@ -532,27 +590,24 @@ public class Game {
 		} else {
 
 			currentLocale = newLocale;
-			
-			try{
+
+			try {
 				myStack.push(currentLocale);
-			} catch (Exception ex){
+			} catch (Exception ex) {
 				System.out.println("Stack is full");
 			}
-			
-			try{
-			myQueue.enqueue(currentLocale);
-			} catch (Exception ex){
+
+			try {
+				myQueue.enqueue(currentLocale);
+			} catch (Exception ex) {
 				System.out.println("Queue is full");
 			}
-			
+
 			moves = moves + 1;
 			points = points + 5;
 			AchievementRatio = points / moves;
-			
-			
 
 		}
-		
 	}
 
 	public static void map() {
@@ -560,11 +615,21 @@ public class Game {
 		System.out.println("Here is a map to guide you around the Lair.");
 		System.out
 				.println("Use the id from the list of locations to determine the exact name of your location");
+		System.out.println("First Floor:- ");
 		System.out.println("    [8]");
 		System.out.println("[6] [5]	[7]");
 		System.out.println("    [4]	");
 		System.out.println("[2] [1]	[3]");
 		System.out.println("    [0]");
+		System.out.println();
+		System.out.println("Second Floor:- ");
+		System.out.println("    [9]");
+		System.out.println("   [10]");
+		System.out.println("   [11]");
+		System.out.println();
+		System.out
+				.println("Hint there is a trap door in the Dungeon, whic you can use to enter the witch's bedroom.");
+		System.out.println();
 
 	}
 
@@ -645,47 +710,55 @@ public class Game {
 		System.out.println();
 
 	}
-	
-	
-	
+
 	private static void quit() {
-		
-		System.out.println("Do you want to print it Backward Or Forward? ");
+
+		System.out.println("Your statistics are:- ");
+		System.out.println("moves: " + moves);
+		System.out.println("money: " + playerBank);
+		System.out.println("score: " + points);
+		System.out.println("strength " + damage);
+		System.out.println("health: " + playerHealth);
+		System.out.println("Skill Ratio: " + AchievementRatio + "%");
+		System.out.println();
+		System.out.println("Do you want to print your adventure backward or forward? ");
 		Scanner inputReader = new Scanner(System.in);
 		String LastChoice = inputReader.nextLine();
-		
+
 		System.out.println("Locations you have Visited:-");
-		
-		if (LastChoice.equalsIgnoreCase("Backward")){
+		System.out.println();
+
+		if (LastChoice.equalsIgnoreCase("Backward")) {
 			Locale hasVisited = null;
-			try{
-			hasVisited = myStack.pop();
-			
-			while(hasVisited != null){
-				System.out.println(hasVisited.getName());
-				System.out.println();
+			try {
 				hasVisited = myStack.pop();
-				
+
+				while (hasVisited != null) {
+					System.out.println(hasVisited.getName());
+
+					hasVisited = myStack.pop();
+
+				}
+			} catch (Exception ex) {
+
 			}
-			} catch(Exception ex){
-				
-			}
-		}if (LastChoice.equalsIgnoreCase("Forward")){
+		}
+		if (LastChoice.equalsIgnoreCase("Forward")) {
 			Locale hasVisited = null;
-			try{
-			hasVisited = myQueue.dequeue();
-			
-			while(hasVisited != null){
-				
-				System.out.println(hasVisited.getName());
-				System.out.println();
+			try {
 				hasVisited = myQueue.dequeue();
+
+				while (hasVisited != null) {
+
+					System.out.println(hasVisited.getName());
+
+					hasVisited = myQueue.dequeue();
+				}
+			} catch (Exception ex) {
+
 			}
-			} catch (Exception ex){
-				
-				
-			}
-		}stillInTheGame = false;
+		}
+		stillInTheGame = false;
 
 	}
 };

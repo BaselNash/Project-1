@@ -116,7 +116,27 @@ public class Magic {
     		
     		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
     			
+    			System.out.println("Testing for Purchase");
     			
+    				if(playerBank > retVal.getCost()){
+    					
+    					System.out.println("You can Purchase this item");
+    					
+    					System.out.println(retVal.getName()
+    							+ " has been added to your encahnted bag.");
+
+    					playerBank = playerBank - retVal.getCost();
+
+    					System.out.println(" Press enter to see other Magic Items.");
+
+    					enchantedBag[enchantedBagSize] = retVal;
+
+    					enchantedBagSize = enchantedBagSize + 1;
+    					
+    				}else{
+    					
+    					System.out.println("You cannot Purchase this item");
+    				}
     			
     		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
     				
@@ -133,34 +153,9 @@ public class Magic {
             }
         return retVal;
 	}	
-	
-	public void purchase(){
-		
-		System.out.println("Testing for Purchase");
-		
-		if(playerBank > retVal.getCost()){
-			
-			System.out.println("You can Purchase this item");
-			
-			System.out.println(retVal.getName() + " has been added to your encahnted bag.");
-
-			playerBank = playerBank - retVal.getCost();
-
-			System.out.println(" Press enter to see other Magic Items.");
-
-			enchantedBag[enchantedBagSize] = retVal;
-
-			enchantedBagSize = enchantedBagSize + 1;
-			
-		}else{
-			
-			System.out.println("You cannot Purchase this item");
-		}
-	}
 
 	
-	
-	
+
 	// Second method is to read the magic items from the file to the list.
 
 	private static void readmagicItemsFromFileToList(String fileName, ListMan lm) {
