@@ -5,6 +5,58 @@ public class Map {
 	public Locale[] Locations;
 	public Item[] localeItems;
 
+	public void moveNorth() {
+		Locale newLocale = currentLocale.getNorth();
+		locationCheck();
+	}
+
+	public void moveSouth() {
+		Locale newLocale = currentLocale.getSouth();
+		locationCheck();
+	}
+
+	public void moveWest() {
+		Locale newLocale = currentLocale.getWest();
+		locationCheck();
+	}
+
+	public void moveEast() {
+		Locale newLocale = currentLocale.getEast();
+		locationCheck();
+	}
+
+	public void moveUp() {
+		Locale newLocale = currentLocale.getUp();
+		locationCheck();
+	}
+
+	public void moveDown() {
+		Locale newLocale = currentLocale.getDown();
+		locationCheck();
+	}
+
+	public Boolean locationCheck() {
+
+		if (newLocale == null) {
+			return false;
+		} else {
+			currentLocale = newLocale;
+
+			try {
+				myStack.push(currentLocale);
+			} catch (Exception ex) {
+				System.out.println("Stack is full");
+			}
+
+			try {
+				myQueue.enqueue(currentLocale);
+			} catch (Exception ex) {
+				System.out.println("Queue is full");
+			}
+		}
+
+	}
+
 	public void StartItems() {
 
 		Item gameItem1 = new Item(0);
