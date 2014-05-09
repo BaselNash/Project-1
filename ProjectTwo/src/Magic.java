@@ -3,12 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Magic {
-	
-	public static ListItem[] enchantedBag = new ListItem[666];
-	public static int enchantedBagSize = 0;
-	public static double playerBank = 0;
-	public static Locale currentLocale;
-	public static Locale newLocale;
 
 	
 	public void readMagicItem(){
@@ -105,7 +99,7 @@ public class Magic {
 
 	// Second method is to read the magic items from the file to the list.
 
-	private static void readmagicItemsFromFileToList(String fileName, ListMan lm) {
+	private void readmagicItemsFromFileToList(String fileName, ListMan lm) {
 
 		File myFile = new File(fileName);
 		try {
@@ -161,7 +155,7 @@ public class Magic {
 		}
 	}
 	
-	private static void selectionSort(ListItem[] items) {
+	private void selectionSort(ListItem[] items) {
         for (int pass = 0; pass < items.length-1; pass++) {
             // System.out.println(pass + "-" + items[pass]);
             int indexOfTarget = pass;
