@@ -3,133 +3,8 @@ public class Map {
 	public Locale currentLocale;
 	public Locale[] Locations;
 	public Item[] localeItems;
-
-	pbulic getQueue(){
-		
-		public Queue() {
-			init();
-		}
-
-		//
-		// Public
-		//
-		public void enqueue(Locale Locations) throws Exception {
-			// Check for overflow.
-			if (backPtr < CAPACITY - 1) {
-				backPtr = backPtr + 1;
-				arr[backPtr] = Locations;
-			} else {
-				throw new Exception();
-			}
-		}
-
-		public Locale dequeue() throws Exception {
-			Locale retVal = null;
-			// Check for underflow.
-
-			if (!this.isEmpty()) {
-				retVal = arr[frontPtr];
-				// Shift every element towards the front.
-				for (int i = 0; i < backPtr; i++) {
-					arr[i] = arr[i + 1];
-				}
-				// Reinitialize the last element
-				arr[backPtr] = null;
-				// shift the back pointer towards the front.
-				backPtr--;
-			} else {
-				// In case of underflow, throw an underflow exception.
-				throw new Exception();
-
-			}
-			return retVal;
-		}
-
-		public boolean isEmpty() {
-			boolean retVal = false;
-			if (backPtr == -1) {
-				retVal = true;
-			}
-			return retVal;
-		}
-
-		public int getCapacity() {
-			return CAPACITY;
-		}
-
-		//
-		// Private
-		//
-		private void init() {
-			for (int i = 0; i < CAPACITY; i++) {
-				arr[i] = null;
-			}
-		}
-
-		private final int CAPACITY = 70;
-		private Locale[] arr = new Locale[CAPACITY];
-		private int frontPtr = 0;
-		private int backPtr = -1;
-	}
-
-	public getStack(){
-		
-		public Stack() {
-		init();
-	}
-
-	public void push(Locale Locations) throws Exception {
-		// Check for stack overflow.
-		if (topPtr > 0) {
-			topPtr = topPtr - 1;
-			arr[topPtr] = Locations;
-		} else {
-			// TODO: Throw an overflow exception.
-			throw new Exception();
-		}
-	}
-
-	public Locale pop() throws Exception {
-		Locale retVal = null;
-		// Check for stack underflow.
-		if (topPtr < CAPACITY) {
-			retVal = arr[topPtr];
-			topPtr = topPtr + 1;
-		} else {
-			// In case of underflow, return -1.
-			// TODO: Throw an underflow exception.
-			throw new Exception();
-
-		}
-		return retVal;
-	}
-
-	public boolean isEmpty() throws Exception {
-		boolean retVal = false;
-		if (topPtr == CAPACITY) {
-			retVal = true;
-		}
-		return retVal;
-	}
-
-	public boolean isEmptyMo() {
-		return (topPtr == CAPACITY);
-	}
-
-	//
-	// Private
-	//
-	private final int CAPACITY = 70;
-	private Locale[] arr = new Locale[CAPACITY];
-	private int topPtr = 0;
-
-	private void init() {
-		for (int i = 0; i < CAPACITY; i++) {
-			arr[i] = null;
-		}
-		topPtr = CAPACITY;
-	}
-	}
+	public static Stack myStack = new Stack();
+	public static Queue myQueue = new Queue();
 
 	public boolean moveNorth() {
 		Locale newLocale = currentLocale.getNorth();
@@ -161,7 +36,7 @@ public class Map {
 		return locationCheck(newLocale);
 	}
 
-	public Boolean locationCheck(Locale newLocale) {
+	public boolean locationCheck(Locale newLocale) {
 
 		if (newLocale == null) {
 			return false;
