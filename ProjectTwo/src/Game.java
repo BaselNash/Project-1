@@ -497,12 +497,12 @@ public class Game {
 
 		if (currentLocale.getId() == 8) {
 			magic.readMagicItem();
-			// promptUser();
+			PromptUser();
 		}
 
 	}
 
-	public void PromptUser(){
+	public static void PromptUser(){
 		
         for (int i = 0; i < magic.getItems().length; i++) {
             if (magic.getItems()[i] != null) {
@@ -519,8 +519,46 @@ public class Game {
 		System.out.println();
 
 		ListItem item = magic.binarySearchArray(targetItem);
-		if (item != null) {
+		if (item != null) { 
 			System.out.println(item.toString());
+			
+			System.out.println("Would you like to purchase this item?");
+            
+            Scanner reader = new Scanner(System.in);
+            choice = reader.nextLine();
+    		
+    		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
+    			
+    			System.out.println("Testing for Purchase");
+    			
+    				if(playerBank > item.getCost()){
+    					
+    					System.out.println("You can Purchase this item");
+    					
+    					System.out.println(item.getName()
+    							+ " has been added to your encahnted bag.");
+
+    					playerBank = playerBank - item.getCost();
+
+    					System.out.println(" Press enter to see other Magic Items.");
+
+    					enchantedBag[enchantedBagSize] = item;
+
+    					enchantedBagSize = enchantedBagSize + 1;
+    					
+    				}else{
+    					
+    					System.out.println("You cannot Purchase this item");
+    				}
+    			
+    		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
+    				
+    			 searchOrExit();
+    			
+    		}
+		} else {
+			
+			searchOrExit();
 		}
 	}
 	
@@ -635,46 +673,8 @@ public class Game {
 
 		}
 		
-		ListItem item = magic.binarySearchArray(targetItem);
-		if (item != null) { 
-			System.out.println("Would you like to purchase this item?");
-            
-            Scanner reader = new Scanner(System.in);
-            choice = reader.nextLine();
-    		
-    		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
-    			
-    			System.out.println("Testing for Purchase");
-    			
-    				if(playerBank > item.getCost()){
-    					
-    					System.out.println("You can Purchase this item");
-    					
-    					System.out.println(item.getName()
-    							+ " has been added to your encahnted bag.");
-
-    					playerBank = playerBank - item.getCost();
-
-    					System.out.println(" Press enter to see other Magic Items.");
-
-    					enchantedBag[enchantedBagSize] = item;
-
-    					enchantedBagSize = enchantedBagSize + 1;
-    					
-    				}else{
-    					
-    					System.out.println("You cannot Purchase this item");
-    				}
-    			
-    		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
-    				
-    			 searchOrExit();
-    			
-    		}
-		} else {
-			
-			searchOrExit();
-		}
+		
+	
 	}
 	
 	public static void searchOrExit(){

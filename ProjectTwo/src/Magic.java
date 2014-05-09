@@ -57,7 +57,7 @@ public class Magic {
 
 	// First method is read through the magic Items and find the users choice
 	
-	private ListItem binarySearchArray(String targetItem){
+	public ListItem binarySearchArray(String targetItem){
 		
 		System.out.println("Binary Search for " + targetItem + ".");
 		ListItem currentItem = null;
