@@ -24,15 +24,15 @@ public class Magic {
 		
 		items = new ListItem[listMan1.getLength()];
 
-		 // .getLength
-																// method can be
-																// found in
-																// listMan.
+		 // .getLength method can be found in listMan.
 		readMagicItemsFromFileToArray(fileName, items);
 
 		// Displaying the items in the array on the command line. Using a for
 		// loop
 		
+	}
+	
+	public void PromptUser(){
 		selectionSort(items);
 		
         for (int i = 0; i < items.length; i++) {
@@ -54,7 +54,6 @@ public class Magic {
 		if (li != null) {
 			System.out.println(li.toString());
 		}
-
 	}
 
 	// Magic Item methods
