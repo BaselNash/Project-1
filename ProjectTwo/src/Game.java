@@ -30,6 +30,7 @@ public class Game {
 	public static Stack myStack = new Stack();
 	public static Queue myQueue = new Queue();
 	public static int damage = 0;
+	public static Magic magic = new Magic();
 
 	public static void main(String[] args) {
 		intialStart();
@@ -351,6 +352,8 @@ public class Game {
 		System.out.println("You are currently in" + currentLocale);
 		System.out.println();
 		System.out.println("Press any key to begin");
+		
+		magic.readMagicItem();
 
 	};
 
@@ -493,7 +496,6 @@ public class Game {
 		System.out.println(currentLocale.getInfo());
 
 		if (currentLocale.getId() == 8) {
-			Magic magic = new Magic();
 			magic.readMagicItem();
 			// promptUser();
 		}
@@ -501,11 +503,12 @@ public class Game {
 	}
 
 	public void PromptUser(){
-		selectionSort(items);
 		
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                System.out.println(items[i].toString());
+		selectionSort(magic.getItems());
+		
+        for (int i = 0; i < magic.getItems().length; i++) {
+            if (magic.getItems()[i] != null) {
+                System.out.println(magic.getItems()[i].toString());
             }
         }
 		

@@ -31,6 +31,11 @@ public class Magic {
 		// loop
 		
 	}
+	
+	public ListItem[] getItems(){
+		return items;
+		
+	}
 
 	// Magic Item methods
 
