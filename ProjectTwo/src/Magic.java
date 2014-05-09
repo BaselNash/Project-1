@@ -9,8 +9,7 @@ public class Magic {
 	public static double playerBank = 0;
 	public static Locale currentLocale;
 	public static Locale newLocale;
-	public static String choice;
-	public static String decision;
+
 	
 	public void readMagicItem(){
 
@@ -63,21 +62,6 @@ public class Magic {
 
 	// First method is read through the magic Items and find the users choice
 	
-	public static void searchOrExit(){
-		
-		System.out.println("Would you like to search or Exit? ");
-		
-		Scanner reader = new Scanner(System.in);
-        decision = reader.nextLine();
-        
-        	if(decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")){
-        		
-        		System.out.println("You have successfully left the premises");
-        		newLocale = currentLocale.getSouth();
-        	}
-		
-	}
-	
 	private ListItem binarySearchArray(ListItem[] items, String targetItem){
 		
 		ListItem retVal = null;
@@ -109,46 +93,9 @@ public class Magic {
         if (isFound) {
             System.out.println("Found " + targetItem + " after " + counter + " comparisons.");
             
-            System.out.println("Would you like to purchase this item?");
-            
-            Scanner reader = new Scanner(System.in);
-            choice = reader.nextLine();
-    		
-    		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
-    			
-    			System.out.println("Testing for Purchase");
-    			
-    				if(playerBank > retVal.getCost()){
-    					
-    					System.out.println("You can Purchase this item");
-    					
-    					System.out.println(retVal.getName()
-    							+ " has been added to your encahnted bag.");
-
-    					playerBank = playerBank - retVal.getCost();
-
-    					System.out.println(" Press enter to see other Magic Items.");
-
-    					enchantedBag[enchantedBagSize] = retVal;
-
-    					enchantedBagSize = enchantedBagSize + 1;
-    					
-    				}else{
-    					
-    					System.out.println("You cannot Purchase this item");
-    				}
-    			
-    		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
-    				
-    			 searchOrExit();
-    			
-    		} 
-            
         } else {
         	
             System.out.println("Could not find " + targetItem + " in " + counter + " comparisons.");
-            
-            	searchOrExit();
             
             }
         return retVal;

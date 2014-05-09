@@ -8,6 +8,8 @@ public class Game {
 	public static Locale currentLocale;
 	public static Locale newLocale;
 	public static String command;
+	public static String choice;
+	public static String decision;
 	public static boolean stillInTheGame = true;
 	public static Locale[] Locations;
 	public static Item[] localeItems;
@@ -608,6 +610,62 @@ public class Game {
 			AchievementRatio = points / moves;
 
 		}
+		
+		ListItem item = Magic.binarySearchArray();
+		if (item != null) { 
+			System.out.println("Would you like to purchase this item?");
+            
+            Scanner reader = new Scanner(System.in);
+            choice = reader.nextLine();
+    		
+    		if(choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")){
+    			
+    			System.out.println("Testing for Purchase");
+    			
+    				if(playerBank > item.getCost()){
+    					
+    					System.out.println("You can Purchase this item");
+    					
+    					System.out.println(item.getName()
+    							+ " has been added to your encahnted bag.");
+
+    					playerBank = playerBank - item.getCost();
+
+    					System.out.println(" Press enter to see other Magic Items.");
+
+    					enchantedBag[enchantedBagSize] = item;
+
+    					enchantedBagSize = enchantedBagSize + 1;
+    					
+    				}else{
+    					
+    					System.out.println("You cannot Purchase this item");
+    				}
+    			
+    		} else if (choice.equalsIgnoreCase("No") || choice.equalsIgnoreCase("N")){
+    				
+    			 searchOrExit();
+    			
+    		}
+		} else {
+			
+			searchOrExit();
+		}
+	}
+	
+	public static void searchOrExit(){
+		
+		System.out.println("Would you like to search or Exit? ");
+		
+		Scanner reader = new Scanner(System.in);
+        decision = reader.nextLine();
+        
+        	if(decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")){
+        		
+        		System.out.println("You have successfully left the premises");
+        		newLocale = currentLocale.getSouth();
+        	}
+		
 	}
 
 	public static void map() {
