@@ -30,6 +30,22 @@ public class Magic {
 		// Displaying the items in the array on the command line. Using a for
 		// loop
 		
+		//Selection Sort To sort the items,
+		
+		for (int pass = 0; pass < items.length-1; pass++) {
+            // System.out.println(pass + "-" + items[pass]);
+            int indexOfTarget = pass;
+            int indexOfSmallest = indexOfTarget;
+            for (int j = indexOfTarget+1; j < items.length; j++) {
+                if (items[j].getName().compareToIgnoreCase(items[indexOfSmallest].getName()) < 0) {
+                    indexOfSmallest = j;
+                }
+            }
+            ListItem temp = items[indexOfTarget];
+            items[indexOfTarget] = items[indexOfSmallest];
+            items[indexOfSmallest] = temp;
+        }
+		
 	}
 	
 	public ListItem[] getItems(){
@@ -41,7 +57,7 @@ public class Magic {
 
 	// First method is read through the magic Items and find the users choice
 	
-	private ListItem binarySearchArray(ListItem[] items, String targetItem){
+	private ListItem binarySearchArray(String targetItem){
 		
 		System.out.println("Binary Search for " + targetItem + ".");
 		ListItem currentItem = null;
@@ -138,21 +154,5 @@ public class Magic {
 			System.out.println("File not found. " + ex.toString());
 		}
 	}
-	
-	private void selectionSort(ListItem[] items) {
-        for (int pass = 0; pass < items.length-1; pass++) {
-            // System.out.println(pass + "-" + items[pass]);
-            int indexOfTarget = pass;
-            int indexOfSmallest = indexOfTarget;
-            for (int j = indexOfTarget+1; j < items.length; j++) {
-                if (items[j].getName().compareToIgnoreCase(items[indexOfSmallest].getName()) < 0) {
-                    indexOfSmallest = j;
-                }
-            }
-            ListItem temp = items[indexOfTarget];
-            items[indexOfTarget] = items[indexOfSmallest];
-            items[indexOfSmallest] = temp;
-        }
-    }
 
 }

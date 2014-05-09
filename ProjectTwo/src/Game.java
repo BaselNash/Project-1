@@ -504,8 +504,6 @@ public class Game {
 
 	public void PromptUser(){
 		
-		selectionSort(magic.getItems());
-		
         for (int i = 0; i < magic.getItems().length; i++) {
             if (magic.getItems()[i] != null) {
                 System.out.println(magic.getItems()[i].toString());
@@ -520,7 +518,7 @@ public class Game {
 		targetItem = inputReader.nextLine();
 		System.out.println();
 
-		ListItem item = binarySearchArray();
+		ListItem item = magic.binarySearchArray(targetItem);
 		if (item != null) {
 			System.out.println(item.toString());
 		}
@@ -637,7 +635,7 @@ public class Game {
 
 		}
 		
-		ListItem item = Magic.binarySearchArray();
+		ListItem item = magic.binarySearchArray(targetItem);
 		if (item != null) { 
 			System.out.println("Would you like to purchase this item?");
             
