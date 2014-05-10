@@ -255,12 +255,12 @@ public class Map {
 		System.out
 				.println("Hint: First, in order to get through the game you need to find the map, to see where you are."
 						+ "\n"
-						+ "and you need to find the cheat message Otherwise you wouldn't be able to win the game. It contains important secrets."
+						+ "and you need to find the cheat message. Otherwise you wouldn't be able to win the game. It contains important secrets."
 						+ "\n"
-						+ "Your objective is to find a kill the witch. She has minions around differnt locations kill them to increase your strength."
+						+ "Your objective is to find and kill the witch. She has minions around differnt locations kill them to increase your strength."
 						+ "\n"
 						+ "Press H or Help For navigation details."
-						+ "\n" + "Good Luck!");
+						+ "\n" + "Good Luck!" + "\n");
 		System.out.println("Press enter to begin");
 
 		// Location Links

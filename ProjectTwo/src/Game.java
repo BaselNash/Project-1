@@ -12,7 +12,8 @@ public class Game {
 	public static int moves = 0;
 	public static int score = 0;
 	public static Item[] playerInventory = new Item[7];
-	public static ListItem[] enchantedBag = new ListItem[666];
+	public static final int ENCHANTED_BAG_SIZE = 666;
+	public static ListItem[] enchantedBag = new ListItem[ENCHANTED_BAG_SIZE];
 	public static int enchantedBagSize = 0;
 	public static int points = 0;
 	public static int AchievementRatio = 0;
@@ -45,6 +46,8 @@ public class Game {
 
 	// Private methods, arrays, and such;
 
+	// player picks up map
+
 	public static void IfMap() {
 
 		for (int i = 0; i < playerInventory.length; i++) {
@@ -63,6 +66,8 @@ public class Game {
 		System.out.println("You do not have the map");
 	}
 
+	// player picks up potion
+
 	public static void IfPotion() {
 
 		for (int i = 0; i < playerInventory.length; i++) {
@@ -79,6 +84,8 @@ public class Game {
 		}
 		System.out.println("You do not have any health potions");
 	}
+
+	// player picks up CheatMessage
 
 	public static void IfCheatMessage() {
 
@@ -121,11 +128,13 @@ public class Game {
 		command = new String();
 		stillInTheGame = true;
 
-		// instances of items.
+		// calling map and magic classes
 		map.StartItems();
 		magic.readMagicItem();
 
 	};
+
+	// validating moves
 
 	public static void validateMove() {
 
@@ -220,6 +229,12 @@ public class Game {
 		System.out.println("   South or S");
 		System.out.println("   West or W");
 		System.out.println("   East or E");
+		System.out.println("   UP or U");
+		System.out.println("   DOWN or D");
+		System.out.println("   POTION or P");
+		System.out.println("   ATTACK or A");
+		System.out.println("   READ or R");
+		System.out.println("   DISPLAY HEALTH or DH");
 		System.out.println("   Take Item or TI");
 		System.out.println("   Take Money or TM");
 		System.out.println("   Inventory or I");
@@ -227,7 +242,6 @@ public class Game {
 		System.out.println("   Quit or Q");
 		System.out.println("   Bank or B");
 		System.out.println("   Enchanted Bag or EN");
-
 	}
 
 	public static void directionsYouCanGo() {
@@ -306,14 +320,14 @@ public class Game {
 		if (item != null) {
 			System.out.println(item.toString());
 
-			System.out.println("Would you like to purchase this item?");
+			System.out.println("Would you like to purchase this item? (Y/N) ");
 
 			Scanner reader = new Scanner(System.in);
 			choice = reader.nextLine();
 
 			if (choice.equalsIgnoreCase("Yes") || choice.equalsIgnoreCase("Y")) {
 
-				System.out.println("Testing for Purchase");
+				System.out.println();
 
 				if (playerBank > item.getCost()) {
 
@@ -330,6 +344,8 @@ public class Game {
 					enchantedBag[enchantedBagSize] = item;
 
 					enchantedBagSize = enchantedBagSize + 1;
+
+					searchOrExit();
 
 				} else {
 
@@ -407,9 +423,6 @@ public class Game {
 		} else if (command.equalsIgnoreCase("Map")
 				|| command.equalsIgnoreCase("m")) {
 			IfMap();
-		} else if (command.equalsIgnoreCase("Cheat")
-				|| command.equalsIgnoreCase("Ch")) {
-			IfCheatMessage();
 		} else if (command.equalsIgnoreCase("Potion")
 				|| command.equalsIgnoreCase("P")) {
 			IfPotion();
@@ -437,22 +450,26 @@ public class Game {
 			help();
 		}
 
-		// if statement for the NewLocation
-
 	}
 
 	public static void searchOrExit() {
 
-		System.out.println("Would you like to search or Exit? ");
+		System.out.println("Would you like to search or Exit? (S/E)");
 
 		Scanner reader = new Scanner(System.in);
 		decision = reader.nextLine();
 
 		if (decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")) {
 
-			System.out.println("You have successfully left the premises");
 			validMove = map.moveSouth();
 			validateMove();
+			System.out.println();
+			System.out.println(map.currentLocale.getInfo());
+
+		}
+		if (decision.equalsIgnoreCase("Search")
+				|| decision.equalsIgnoreCase("S")) {
+			PromptUser();
 		}
 
 	}
@@ -559,6 +576,8 @@ public class Game {
 	}
 
 	private static void quit() {
+
+		// the stats of the game
 
 		System.out.println("Your statistics are:- ");
 		System.out.println("moves: " + moves);
