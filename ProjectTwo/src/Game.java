@@ -5,14 +5,10 @@ public class Game {
 
 	// Global
 
-	public static Locale currentLocale;
-	public static Locale newLocale;
 	public static String command;
 	public static String choice;
 	public static String decision;
 	public static boolean stillInTheGame = true;
-	public static Locale[] Locations;
-	public static Item[] localeItems;
 	public static int moves = 0;
 	public static int score = 0;
 	public static Item[] playerInventory = new Item[7];
@@ -26,11 +22,10 @@ public class Game {
 	public static int playerHealth = 125;
 	public static Item healthPotion;
 	public static int attackPower = 15;
-	public static Stack myStack = new Stack();
-	public static Queue myQueue = new Queue();
 	public static int damage = 0;
 	public static Magic magic = new Magic();
 	public static Map map = new Map();
+	public static boolean validMove;
 
 	public static void main(String[] args) {
 		intialStart();
@@ -132,6 +127,20 @@ public class Game {
 
 	};
 
+	public static void validMove() {
+
+		if (validMove) {
+			System.out.println("Invalid Move! Try Again");
+			System.out.println();
+
+		} else {
+
+			moves = moves + 1;
+			points = points + 5;
+			AchievementRatio = points / moves;
+		}
+	}
+
 	public static void attack() {
 
 		for (int i = 0; i < playerInventory.length; i++) {
@@ -145,7 +154,7 @@ public class Game {
 
 		// write the code for attacking.
 
-		Monster monster = currentLocale.getMonster();
+		Monster monster = map.currentLocale.getMonster();
 
 		if (monster != null) {
 			if (monster.getHealth() > 0) {
@@ -223,12 +232,12 @@ public class Game {
 
 	public static void directionsYouCanGo() {
 
-		Locale northDirection = currentLocale.getNorth();
-		Locale southDirection = currentLocale.getSouth();
-		Locale eastDirection = currentLocale.getEast();
-		Locale westDirection = currentLocale.getWest();
-		Locale downDirection = currentLocale.getDown();
-		Locale upDirection = currentLocale.getUp();
+		Locale northDirection = map.currentLocale;
+		Locale southDirection = map.currentLocale;
+		Locale eastDirection = map.currentLocale;
+		Locale westDirection = map.currentLocale;
+		Locale downDirection = map.currentLocale;
+		Locale upDirection = map.currentLocale;
 
 		System.out.print("You can move ");
 
@@ -268,9 +277,9 @@ public class Game {
 
 	public static void updateDisplay() {
 
-		System.out.println(currentLocale.getInfo());
+		System.out.println(map.currentLocale.getInfo());
 
-		if (currentLocale.getId() == 8) {
+		if (map.currentLocale.getId() == 8) {
 			magic.readMagicItem();
 			PromptUser();
 		}
@@ -341,6 +350,9 @@ public class Game {
 
 	private static void typeNavigation() {
 
+		if (validMove) {
+
+		}
 		// The Intial position > 0 which starts the position
 		// of
 		// the game.
@@ -349,32 +361,38 @@ public class Game {
 
 		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
 
-			newLocale = currentLocale.getNorth();
+			map.moveNorth();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("south")
 				|| command.equalsIgnoreCase("s")) {
 
-			newLocale = currentLocale.getSouth();
+			map.moveSouth();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("east")
 				|| command.equalsIgnoreCase("e")) {
 
-			newLocale = currentLocale.getEast();
+			map.moveEast();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("west")
 				|| command.equalsIgnoreCase("w")) {
 
-			newLocale = currentLocale.getWest();
+			map.moveWest();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("up")
 				|| command.equalsIgnoreCase("u")) {
 
-			newLocale = currentLocale.getUp();
+			map.moveUp();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("down")
 				|| command.equalsIgnoreCase("d")) {
 
-			newLocale = currentLocale.getDown();
+			map.moveDown();
+			validMove();
 
 		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
@@ -424,32 +442,6 @@ public class Game {
 
 		// if statement for the NewLocation
 
-		if (newLocale == null) {
-			System.out.println("Invalid Move! Try Again");
-			System.out.println();
-
-		} else {
-
-			currentLocale = newLocale;
-
-			try {
-				myStack.push(currentLocale);
-			} catch (Exception ex) {
-				System.out.println("Stack is full");
-			}
-
-			try {
-				myQueue.enqueue(currentLocale);
-			} catch (Exception ex) {
-				System.out.println("Queue is full");
-			}
-
-			moves = moves + 1;
-			points = points + 5;
-			AchievementRatio = points / moves;
-
-		}
-
 	}
 
 	public static void searchOrExit() {
@@ -462,7 +454,8 @@ public class Game {
 		if (decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")) {
 
 			System.out.println("You have successfully left the premises");
-			newLocale = currentLocale.getSouth();
+			map.moveSouth();
+			validMove();
 		}
 
 	}
@@ -484,9 +477,6 @@ public class Game {
 		System.out.println("   [10]");
 		System.out.println("   [11]");
 		System.out.println();
-		for (int i = 0; i < Locations.length; ++i) {
-			System.out.println(i + ":" + Locations[i].getName());
-		}
 		System.out
 				.println("Hint there is a trap door in the Dungeon, whic you can use to enter the witch's bedroom.");
 		System.out.println();
@@ -530,19 +520,19 @@ public class Game {
 
 	public static void takeItem() {
 
-		if (currentLocale.getItems().length == 0) {
+		if (map.currentLocale.getItems().length == 0) {
 
 			System.out.println("There are no items to take");
 
 		} else {
 
-			Item locationItem = currentLocale.getItems()[0];
+			Item locationItem = map.currentLocale.getItems()[0];
 
 			playerInventory[playerInventorySize] = locationItem;
 
 			playerInventorySize = playerInventorySize + 1;
 
-			currentLocale.setItems(new Item[] {});
+			map.currentLocale.setItems(new Item[] {});
 
 			System.out.println("you have taken item:" + locationItem);
 			System.out.println();
@@ -558,11 +548,11 @@ public class Game {
 
 	public static void takeMoney() {
 
-		double locationMoney = currentLocale.getMoney();
+		double locationMoney = map.currentLocale.getMoney();
 
 		playerBank = playerBank + locationMoney;
 
-		currentLocale.setMoney(0);
+		map.currentLocale.setMoney(0);
 
 		System.out.println("You have taken:" + locationMoney
 				+ " Sapphires. Your bank Contains: " + playerBank
@@ -592,12 +582,12 @@ public class Game {
 		if (LastChoice.equalsIgnoreCase("Backward")) {
 			Locale hasVisited = null;
 			try {
-				hasVisited = myStack.pop();
+				hasVisited = map.getStack().pop();
 
 				while (hasVisited != null) {
 					System.out.println(hasVisited.getName());
 
-					hasVisited = myStack.pop();
+					hasVisited = map.getStack().pop();
 
 				}
 			} catch (Exception ex) {
@@ -607,13 +597,13 @@ public class Game {
 		if (LastChoice.equalsIgnoreCase("Forward")) {
 			Locale hasVisited = null;
 			try {
-				hasVisited = myQueue.dequeue();
+				hasVisited = map.getQueue().dequeue();
 
 				while (hasVisited != null) {
 
 					System.out.println(hasVisited.getName());
 
-					hasVisited = myQueue.dequeue();
+					hasVisited = map.getQueue().dequeue();
 				}
 			} catch (Exception ex) {
 

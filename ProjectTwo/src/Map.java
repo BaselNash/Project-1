@@ -6,6 +6,18 @@ public class Map {
 	public static Stack myStack = new Stack();
 	public static Queue myQueue = new Queue();
 
+	public Queue getQueue() {
+		return myQueue;
+	}
+
+	public Stack getStack() {
+		return myStack;
+	}
+
+	public Locale GetLoacle() {
+		return currentLocale;
+	}
+
 	public boolean moveNorth() {
 		Locale newLocale = currentLocale.getNorth();
 		return locationCheck(newLocale);
@@ -214,7 +226,7 @@ public class Map {
 
 		// set up the location array.
 
-		Locations = new Locale[9];
+		Locations = new Locale[12];
 		Locations[0] = location0;
 		Locations[1] = location1;
 		Locations[2] = location2;
