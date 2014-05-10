@@ -93,12 +93,8 @@ public class Map {
 		gameItem5.setDesc("A really useful thing to have, if the witch comes.");
 
 		Item gameItem6 = new Item(5);
-		gameItem6.setName("Cheat message 1");
+		gameItem6.setName("Cheat message");
 		gameItem6.setDesc("Important to get through the game!!.");
-
-		Item gameItem7 = new Item(6);
-		gameItem7.setName("Cheat message 2");
-		gameItem7.setDesc("Important to get through the game!!.");
 
 		// Create the instance of monsters
 
@@ -166,7 +162,7 @@ public class Map {
 		location6.setName("Kitchen");
 		location6
 				.setDesc("An elegant and beautiful kitchen, with all the sweats and candy you can eat.");
-		location6.setItems(new Item[] { gameItem7 });
+		location6.setItems(new Item[] {});
 		location6.setDangerLevel("0.2%");
 		location6.setMoney(18);
 
