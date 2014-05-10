@@ -30,6 +30,7 @@ public class Game {
 	public static Queue myQueue = new Queue();
 	public static int damage = 0;
 	public static Magic magic = new Magic();
+	public static Map map = new Map();
 
 	public static void main(String[] args) {
 		intialStart();
@@ -126,7 +127,7 @@ public class Game {
 		stillInTheGame = true;
 
 		// instances of items.
-
+		map.StartItems();
 		magic.readMagicItem();
 
 	};

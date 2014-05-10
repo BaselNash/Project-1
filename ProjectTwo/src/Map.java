@@ -55,7 +55,7 @@ public class Map {
 				System.out.println("Queue is full");
 			}
 		}
-
+		return true;
 	}
 
 	public void StartItems() {
