@@ -127,9 +127,9 @@ public class Game {
 
 	};
 
-	public static void validMove() {
+	public static void validateMove() {
 
-		if (validMove) {
+		if (!validMove) {
 			System.out.println("Invalid Move! Try Again");
 			System.out.println();
 
@@ -350,9 +350,6 @@ public class Game {
 
 	private static void typeNavigation() {
 
-		if (validMove) {
-
-		}
 		// The Intial position > 0 which starts the position
 		// of
 		// the game.
@@ -361,38 +358,38 @@ public class Game {
 
 		if (command.equalsIgnoreCase("north") || command.equalsIgnoreCase("n")) {
 
-			map.moveNorth();
-			validMove();
+			validMove = map.moveNorth();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("south")
 				|| command.equalsIgnoreCase("s")) {
 
-			map.moveSouth();
-			validMove();
+			validMove = map.moveSouth();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("east")
 				|| command.equalsIgnoreCase("e")) {
 
-			map.moveEast();
-			validMove();
+			validMove = map.moveEast();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("west")
 				|| command.equalsIgnoreCase("w")) {
 
-			map.moveWest();
-			validMove();
+			validMove = map.moveWest();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("up")
 				|| command.equalsIgnoreCase("u")) {
 
 			map.moveUp();
-			validMove();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("down")
 				|| command.equalsIgnoreCase("d")) {
 
-			map.moveDown();
-			validMove();
+			validMove = map.moveDown();
+			validateMove();
 
 		} else if (command.equalsIgnoreCase("help")
 				|| command.equalsIgnoreCase("h")) {
@@ -454,8 +451,8 @@ public class Game {
 		if (decision.equalsIgnoreCase("Exit") || decision.equalsIgnoreCase("E")) {
 
 			System.out.println("You have successfully left the premises");
-			map.moveSouth();
-			validMove();
+			validMove = map.moveSouth();
+			validateMove();
 		}
 
 	}

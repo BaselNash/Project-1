@@ -3,8 +3,8 @@ public class Map {
 	public Locale currentLocale;
 	public Locale[] Locations;
 	public Item[] localeItems;
-	public static Stack myStack = new Stack();
-	public static Queue myQueue = new Queue();
+	public Stack myStack = new Stack();
+	public Queue myQueue = new Queue();
 
 	public Queue getQueue() {
 		return myQueue;
